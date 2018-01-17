@@ -2,7 +2,7 @@
     "title": "Entries",
     "docpath": "entries",
     "introduction": [
-        "Entries compose <a class=\"link\" href=\"/documentation/transactions\">Transactions</a>. An individual entry allocates some value to an <a class=\"link\" href=\"/documentation/account\">Account</a> as either a Debit or a Credit. All together, those Debits and Credits will add up to zero, satisfying the fundamental double-entry accounting equality.",
+        "Entries compose <a class=\"link\" href=\"/documentation/transactions\">Transactions</a>. An individual entry allocates some value to an <a class=\"link\" href=\"/documentation/account\">Account</a> as either one of the fundamental <a class=\"link\" href=\"/documentation/constants/sides\">Sides</a>: a debit or a credit. All together, those debits and credits will add up to zero, satisfying the fundamental double-entry accounting equality.",
         "When consuming the Amatino API, operations involving Entries always occur as part of a Transaction request. For example, when creating a Transaction, you will specify a JSON Array of Entry objects under the <span class=\"monospace\">entries</span> key. You will never send or recieve an Entry object on its own to or from the Amatino API."
     ],
     "object": {
@@ -39,7 +39,7 @@
                         "mono": false
                     },
                     "description": {
-                        "value": "A description of this Entry. If an empty string is specified, Amatino will use the parent Transaction description to describe this entry.",
+                        "value": "A description of this Entry. If an empty string is specified, Amatino will use the parent Transaction description to describe this Entry.",
                         "mono": false
                     },
                     "example": {

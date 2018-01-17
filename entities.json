@@ -112,11 +112,11 @@
             "required_headers": [
                 {
                     "key": "X-Signature",
-                    "content": "Your Amatino request signature"
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature"
                 },
                 {
                     "key": "X-Session-ID",
-                    "content": "An Amatino session id"
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID"
                 }
             ],
             "required_url_parameters": null,
@@ -210,11 +210,11 @@
             "required_headers": [
                 {
                     "key": "X-Signature",
-                    "content": "Your Amatino request signature"
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature"
                 },
                 {
                     "key": "X-Session-ID",
-                    "content": "An Amatino session id"
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID"
                 }
             ],
             "required_url_parameters": [
@@ -241,11 +241,11 @@
             "required_headers": [
                 {
                     "key": "X-Signature",
-                    "content": "Your Amatino request signature"
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature"
                 },
                 {
                     "key": "X-Session-ID",
-                    "content": "An Amatino session id"
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID"
                 }
             ],
             "required_url_parameters": null,
@@ -373,11 +373,11 @@
             "required_headers": [
                 {
                     "key": "X-Signature",
-                    "content": "Your Amatino request signature"
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature"
                 },
                 {
                     "key": "X-Session-ID",
-                    "content": "An Amatino session id"
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID"
                 }
             ],
             "required_url_parameters": [
@@ -421,11 +421,11 @@
             "required_headers": [
                 {
                     "key": "X-Signature",
-                    "content": "Your Amatino request signature"
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature"
                 },
                 {
                     "key": "X-Session-ID",
-                    "content": "An Amatino session id"
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID"
                 }
             ],
             "required_url_parameters": [

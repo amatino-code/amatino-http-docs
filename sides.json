@@ -1,0 +1,62 @@
+{
+    "title": "Sides",
+    "docpath": "constants/sides",
+    "introduction": [
+        "Sides are Amatino's name for the fundamental double-entry bookeeping building blocks, the debit and credit. They are constant and unchanging, so while you can retrieve them with a GET request, you can also safely hard-code them into your application.",
+        "When consuming the Amatino API, Sides primarily pop up when dealing with <a class=\"link\" href=\"/documentation/transactions\">Transactions</a>. Transactions are made up of multiple <a class=\"link\" href=\"/documentation/entries\">Entries</a>, each of which must include a Side."
+    ],
+    "object": {
+        "name": "Side",
+        "exposition": "Side objects are super simple, containing nothing but the name of the Side.",
+        "form": {
+            "root": "list",
+            "components": [
+                {
+                    "key": {
+                        "value": "\"name\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "Either <span class=\"monospace\">debit</span> or <span class=\"monospace\">credit</span>",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"debit\"",
+                        "mono": true
+                    }
+                }
+            ]
+        }
+    },
+    "actions": [
+        {
+            "name": "Retrieve",
+            "method": "GET",
+            "path": "/constants/sides",
+            "description": "Retrieve the Amatino Sides constants",
+            "return_root_type": "JSON Array",
+            "required_json_data": null,
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature"
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID"
+                }
+            ],
+            "required_url_parameters": null,
+            "returns": {
+                "root": "list",
+                "components": {
+                    "object": "side"
+                }
+            }
+        }
+    ]
+}

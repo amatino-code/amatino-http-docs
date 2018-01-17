@@ -1,0 +1,157 @@
+{
+    "title": "Sessions",
+    "docpath": "sessions",
+    "introduction": [
+        "Sessions are the keys to the Amatino kingdom. All requests to the Amatino API, except those requests to create Sessions themselves, must include two HTTP headers: An integer session identifier, and a Hashed Message Authentication Code (HMAC) signed with a Session API Key.",
+        "Creating a Session with a POST request is analogous to 'logging in', and deleting a Session with a DELETE request is analogous to 'logging out'. Your application might wish to create multiple Sessions for a User. For example, one per device.",
+        "The formula for the Amatino API HMAC signature is <span class=\"monospace\">SHA512((Unix timestamp in seconds) + (URI path) + (JSON data))</span>, using the Session API key as the hash key. The HMAC should be URL-safe Base64 encoded. For more help with generating request signatures, check out the <a class=\"list\" href=\"/knowledge/request-signatures\">Amatino API Request Signature knowledge base article.</a>"
+    ],
+    "object": {
+        "name": "Session",
+        "exposition": "When returning a Session object to you, Amatino will use the following structure",
+        "form": {
+            "root": "object",
+            "components": [
+                {
+                    "key": {
+                        "value": "\"api_key\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "A URL-safe base-64 encoded 256-bit random number generated in a cryptographically secure manner",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"EPcmwPnjFQFWrZjYtM3J6GZMrGA0gC-40cUD0NKK_K0A\"",
+                        "mono": true
+                    },
+                    "note": {
+                        "value": "Amatino replaces all <span class=\"monospace\">\"=\"</span> padding characters with the character <span class=\"monospace\">\"A\"</span>.",
+                        "mono": false
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"session_id\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Number",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "An integer Session identifier",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": 4200100,
+                        "mono": true
+                    }
+                }
+            ]
+        }
+    },
+    "actions": [
+        {
+            "name": "Create",
+            "method": "POST",
+            "path": "/authorisation/session",
+            "description": "Create a new Amatino API Session",
+            "return_root_type": "JSON Object",
+            "required_json_data": {
+                "root": "object",
+                "components": [
+                    {
+                        "key": {
+                            "value": "\"account_email\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The email address associated with the account for which a Session is to be created",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"clever@cookie.com\"",
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"secret\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The passphrase associated with the account for which a Session is to be created",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"excellent high entropy passphrase\"",
+                            "mono": true
+                        }
+                    }
+                ]
+            },
+            "required_headers": null,
+            "required_url_parameters": null,
+            "returns": {
+                "root": "object",
+                "components": {
+                    "object": "session"
+                }
+            }
+        }, {
+            "name": "Delete",
+            "method": "DELETE",
+            "path": "/authorisation/session",
+            "return_root_type": "JSON Object",
+            "description": "Delete a Session, ending its ability to be used to authenticated to the Amatino API",
+            "required_json_data": null,
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your <a class=\"link\" href=\"#objects-section\">Session</a> signature"
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An an integer <a class=\"link\" href=\"#objects-section\">Session</a> ID"
+                }
+            ],
+            "required_url_parameters": null,
+            "returns": {
+                "root": "object",
+                "components": [
+                    {
+                        "key": {
+                            "value": "\"session_id\"",
+                            "mono": true
+                        },
+                        "type": {
+                            "value": "JSON Number",
+                            "mono": false
+                        },
+                        "description": {
+                            "value": "The id of a deleted session",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": 4200100,
+                            "mono": true
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
