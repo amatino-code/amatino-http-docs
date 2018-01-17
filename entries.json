@@ -1,0 +1,99 @@
+{
+    "title": "Entries",
+    "docpath": "entries",
+    "introduction": [
+        "Entries compose <a class=\"link\" href=\"/documentation/transactions\">Transactions</a>. An individual entry allocates some value to an <a class=\"link\" href=\"/documentation/account\">Account</a> as either a Debit or a Credit. All together, those Debits and Credits will add up to zero, satisfying the fundamental double-entry accounting equality.",
+        "When consuming the Amatino API, operations involving Entries always occur as part of a Transaction request. For example, when creating a Transaction, you will specify a JSON Array of Entry objects under the <span class=\"monospace\">entries</span> key. You will never send or recieve an Entry object on its own to or from the Amatino API."
+    ],
+    "object": {
+        "name": "Entry",
+        "exposition": "Amatino expects the following object structure when creating and updating Entries, and will provide the same object back to you when asked to retrieve them. Note that you never directly interact with an Entry object on its own, instead they are used as part of <a class=\"link\" href=\"/documentation/transactions\">Transactions</a> requests.",
+        "form": {
+            "root": "list",
+            "components": [
+                {
+                    "key": {
+                        "value": "\"account_id\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Number",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The integer identifier of the <a class=\"link\" href=\"/documentation/accounts\">Account</a> to which this Entry is allocated.",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": 42,
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "Description",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "A description of this Entry. If an empty string is specified, Amatino will use the parent Transaction description to describe this entry.",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"Juicy dividend on a big ol' pile of diversified stocks\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"side\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "Either <span class=\"monospace\">debit</span> or <span class=\"monospace\">credit</span>.",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"debit\"",
+                        "mono": true
+                    },
+                    "source": {
+                        "value": "/constants/sides",
+                        "mono": false,
+                        "link": "/sides"
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"amount\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The absolute value of this Entry, denominated in the parent <a class=\"link\" href=\"/documentation/transactions\">Transaction</a> unit or custom unit.",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"23125.95\"",
+                        "mono": true
+                    },
+                    "max value": {
+                        "value": "Somewhere north of one quadrillion (Your mileage may vary at that magnitude!)",
+                        "mono": false
+                    }
+                }
+            ]
+        }
+    },
+    "actions": null
+}

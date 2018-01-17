@@ -3,7 +3,7 @@
     "docpath": "accounts",
     "introduction": [
         "An Amatino Account is collection of related economic activity. For example, an Account might represent a bank account, income from a particular client, or entity equity. Many Accounts together compose an <a class=\"link\" href=\"\\documentation\\entities\">Entity</a>.",
-        "Accounts themselves are composed of <a class=\"link\" href=\"\\documentation\\transactions\">Transactions</a>, and the sum of constituent transactions yield an <a class=\"link\" href=\"\\documentation\\accounts\\balance\">Account Balance</a>\"",
+        "Accounts themselves are composed of <a class=\"link\" href=\"\\documentation\\transactions\">Transactions</a>, and the sum of constituent transactions yield an <a class=\"link\" href=\"\\documentation\\accounts\\balance\">Account Balance</a>.",
         "The Accounts that compose an Entity may be viewed together as part of the <a class=\"link\" href=\"\\documentation\\tree\">Tree</a>."
     ],
     "object": {

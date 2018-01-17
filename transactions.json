@@ -2,7 +2,9 @@
     "title": "Transactions",
     "docpath": "transactions",
     "introduction": [
-        "A Transaction is an exchange of value between two or more <a class=\"link\" href=\"/documentation/accounts\">Accounts</a>."
+        "A Transaction is an exchange of value between two or more <a class=\"link\" href=\"/documentation/accounts\">Accounts</a>. For example, the raising of an invoice, the incrurring of a liability, or the receipt of a payment. Many Transactions together, each touching the same Account, form an <a class=\"link\" href=\"/documentation/accounts/ledger\">Account Ledger</a>, and the cumulative sum of the Transactions form an <a class=\"link\" href=\"/documentation/accounts/balance\">Account Balance</a>.",
+        "Transactions are composed of <a class=\"link\" href=\"/documentation/entries\">Entries</a>, each of which includes a debit or credit. The sum of all debits and credits in all the Entries that compose a Transaction must always equal zero.",
+        "Transactions may be retrieved and created in arbitrary units, either a <a class=\"link\" href=\"/documentation/unit\">Global Units</a> or <a class=\"link\" href=\"/documentation/custom_unit\">Custom Units</a>. Amatino will transparently handle all unit conversions. For example, a Transaction could be created in Australian Dollars, touch an Account denominated in Pounds Sterling, and be retrieved in Bitcoin."
     ],
     "object": {
         "name": "Transaction",
@@ -12,25 +14,7 @@
             "components": [
                 {
                     "key": {
-                        "value": "\"entity_id\"",
-                        "mono": true
-                    },
-                    "type": {
-                        "value": "JSON String",
-                        "mono": false
-                    },
-                    "description": {
-                        "value": "A unique Amatino identifier for this entity",
-                        "mono": false
-                    },
-                    "example": {
-                        "value": "\"oB3cjSNKXklkJ4Tb\"",
-                        "mono": true
-                    }
-                },
-                {
-                    "key": {
-                        "value": "\"owner\"",
+                        "value": "\"transaction_id\"",
                         "mono": true
                     },
                     "type": {
@@ -38,11 +22,47 @@
                         "mono": false
                     },
                     "description": {
-                        "value": "A unique, integer identifier of the Amatino user who owns this entity",
+                        "value": "A unique identifier for this transaction within the entity",
                         "mono": false
                     },
                     "example": {
-                        "value": 9523413,
+                        "value": 95348572,
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"transaction_time\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The time at UTC that the transaction occured, in the format YYYY-MM-DD_HH24:MI:SS.US",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "2017-01-07_17:22:16.51245",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"version_time\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The time at UTC when the transaction was stored in Amatino, in the format YYYY-MM-DD_HH24:MI:SS.US",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"2018-01-31_20:45:42.02001\"",
                         "mono": true
                     }
                 },
@@ -56,46 +76,128 @@
                         "mono": false
                     },
                     "description": {
-                        "value": "A description of the entity",
+                        "value": "A description of the transaction",
                         "mono": false
                     },
                     "example": {
-                        "value": "\"A company devoted to creating great accounting products\"",
+                        "value": "\"Receipt of payment for exquisite accounting services\"",
                         "mono": true
                     }
                 },
                 {
                     "key": {
-                        "value": "\"permissions_graph\"",
+                        "value": "\"version\"",
                         "mono": true
                     },
                     "type": {
-                        "value": "JSON Object",
+                        "value": "JSON Number",
                         "mono": false
                     },
                     "description": {
-                        "value": "A description of the permissions granted to Amatino users with respect to this entity.",
+                        "value": "Incrementing integer recording the version of the transaction",
                         "mono": false
                     },
                     "example": {
-                        "value": {
-                            "5235891": {
-                                "56": {
-                                    "read": true,
-                                    "write": true
-                                },
-                                "725": {
-                                    "read": true,
-                                    "write": false
-                                }
-                            },
-                            "9523413": {
-                                "56": {
-                                    "read": true,
-                                    "write": false
-                                }
-                            }
-                        },
+                        "value": 4,
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"global_unit_denomination\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String or JSON Null",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The global unit denomination of this transaction, if one exists",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"usd\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"custom_unit_denomination\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String or JSON Null",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The custom unit denomination of this transaction, if one exists",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"xrp\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"author\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Number",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The integer identifier of the Amatino user account that authored this version of the transaction",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"xrp\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"active\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Boolean",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "A boolean indication of whether this transaction is in a deleted state (false) or an active state (true)",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": true,
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"entries\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Array",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "A list of <a class=\"link\" href=\"/documents/entries\">Entry objects</a> party to this transaction",
+                        "mono": false
+                    },
+                    "listed_object": {
+                        "value": "Entry",
+                        "mono": false,
+                        "link": "/documents/entries"
+                    },
+                    "minimum length": {
+                        "value": 2,
+                        "mono": true
+                    },
+                    "maximum length": {
+                        "value": 100,
                         "mono": true
                     }
                 }
@@ -106,106 +208,8 @@
         {
             "name": "Create",
             "method": "POST",
-            "path": "/entities",
+            "path": "/transactions",
             "description": "Create a new entity or entities",
-            "required_headers": [
-                {
-                    "key": "X-Signature",
-                    "content": "Your Amatino request signature"
-                },
-                {
-                    "key": "X-Session-ID",
-                    "content": "An Amatino session id"
-                }
-            ],
-            "required_url_parameters": null,
-            "return_root_type": "JSON Array",
-            "required_json_data": {
-                "root": "list",
-                "max_length": 10,
-                "components": [
-                    {
-                        "key": {
-                            "value": "\"name\"",
-                            "mono": true
-                        },
-                        "description": {
-                            "value": "Friendly name of the entity",
-                            "mono": false
-                        },
-                        "type": {
-                            "value": "string",
-                            "mono": false
-                        },
-                        "example": {
-                            "value": "\"Amatino Pty Ltd\"",
-                            "mono": true
-                        },
-                        "max char length": {
-                            "value": 1024,
-                            "mono": true
-                        }
-                    },
-                    {
-                        "key": {
-                            "value": "\"description\"",
-                            "mono": true
-                        },
-                        "description": {
-                            "value": "A friendly description of the entity",
-                            "mono": false
-                        },
-                        "type": {
-                            "value": "JSON String",
-                            "mono": false
-                        },
-                        "example": {
-                            "value": "A company devoted to creating great accounting products",
-                            "mono": false
-                        },
-                        "max char length": {
-                            "value": 4096,
-                            "mono": true
-                        } 
-                    },
-                    {
-                        "key": {
-                            "value": "\"region name\"",
-                            "mono": true
-                        },
-                        "description": {
-                            "value": "The region in which the entity's data will be stored",
-                            "mono": false
-                        },
-                        "type": {
-                            "value": "JSON String",
-                            "mono": false
-                        },
-                        "example": {
-                            "value": "\"Australia East 1\"",
-                            "mono": true
-                        },
-                        "source": {
-                            "value": "/regions",
-                            "mono": false,
-                            "link": "/documentation/regions"
-                        }
-                    }
-                ]
-            },
-            "returns": {
-                "root": "list",
-                "components": {
-                    "object": "entity"
-                }
-            }
-        }, {
-            "name": "Retrieve",
-            "method": "GET",
-            "path": "/entities",
-            "description": "Retrieve metadata describing an entity or entities",
-            "return_root_type": "JSON Array",
-            "required_json_data": null,
             "required_headers": [
                 {
                     "key": "X-Signature",
@@ -220,7 +224,255 @@
                 {
                     "key": "entity_id",
                     "type": "string",
-                    "description": "An Amatino entity id",
+                    "description": "The entity id of the entity in which you wish to store the transaction",
+                    "example": "oB3cjSNKXklkJ4Tb",
+                    "repeatable": false
+                }
+            ],
+            "return_root_type": "JSON Array",
+            "required_json_data": {
+                "root": "list",
+                "max_length": 10,
+                "components": [
+                    {
+                        "key": {
+                            "value": "\"transaction_time\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "Time at which the transaction occured, or is to occur, in the format YYYY-MM-DD_HH24:MI:SS.US",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"2017-01-07_17:22:16.51245\"",
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"description\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "A friendly description of the transaction",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "Receipt of payment for exquisite accounting services",
+                            "mono": false
+                        },
+                        "max char length": {
+                            "value": 1024,
+                            "mono": true
+                        } 
+                    },
+                    {
+                        "key": {
+                            "value": "\"global_unit_denomination\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The global unit in which this transaction is denominated, if desired. Either a custom or global unit must be specified.",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"usd\"",
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "/units/list",
+                            "mono": false,
+                            "link": "/documentation/unit_list"
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"custom_unit_denomination\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The custom unit in which this transaction is denominated, if desired. Either a custom or global unit must be specified.",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"xrp\"",
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "/custom_unit/list",
+                            "mono": false,
+                            "link": "/documentation/custom_unit_list"
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"entries\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "A list of entry objects that comprise the transaction",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "list objects": {
+                            "value": "Entry",
+                            "mono": false,
+                            "link": "/documentation/entries"
+                        },
+                        "example": {
+                            "value": "See <a href=\"/documentation/entries\" class=\"link\">Entries",
+                            "mono": false
+                        },
+                        "minimum length": {
+                            "value": 2,
+                            "mono": true
+                        },
+                        "maximum length": {
+                            "value": 100,
+                            "mono": true
+                        }
+                    }
+                ]
+            },
+            "returns": {
+                "root": "list",
+                "components": {
+                    "object": "transaction"
+                }
+            }
+        }, {
+            "name": "Retrieve",
+            "method": "GET",
+            "path": "/transactions",
+            "description": "Retrieve a transaction or transactions",
+            "return_root_type": "JSON Array",
+            "required_json_data": {
+                "root": "list",
+                "max_length": 10,
+                "components": [
+                    {
+                        "key": {
+                            "value": "\"transaction_id\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The unique integer identifier of the transaction within the target entity",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Number",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": 512415,
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"global_unit_denomination\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The global unit denomination in which you would like to view the transaction, if desired. Specify JSON Null both here and in the custom unit to retrieve the transaction in the underlying account unit.",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"eur\"",
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "/units/list",
+                            "mono": false,
+                            "link": "/documentation/unit_list"
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"custom_unit_denomination\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The custom unit denomination in which you would like to view the transaction, if desired. Specify JSON Null both here and in the custom unit to retrieve the transaction in the underlying account unit.",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"btc\"",
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "/custom_units/list",
+                            "mono": false,
+                            "link": "/documentation/custom_unit_list"
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"version\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The integer version identifier of the version of the transaction you wish to retrieve. Specify JSON Null to retrieve the latest version.",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Number or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": 12,
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "'/transactions/version/list'",
+                            "mono": false,
+                            "link": "/documentation/transactions_version_list"
+                        }
+                    }
+                ]
+            },
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your Amatino request signature"
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An Amatino session id"
+                }
+            ],
+            "required_url_parameters": [
+                {
+                    "key": "entity_id",
+                    "type": "string",
+                    "description": "The entity id of the entity from which you wish to retrieve a transaction",
                     "example": "oB3cjSNKXklkJ4Tb",
                     "repeatable": true
                 }
@@ -228,15 +480,15 @@
             "returns": {
                 "root": "list",
                 "components": {
-                    "object": "entity"
+                    "object": "transaction"
                 }
             }
         }, {
             "name": "Update",
             "method": "PUT",
-            "path": "/entities",
+            "path": "/transactions",
             "return_root_type": "JSON Array",
-            "description": "Update metadata of an existing entity or entities",
+            "description": "Update an existing transaction or transaction",
             "required_headers": [
                 {
                     "key": "X-Signature",
@@ -254,11 +506,29 @@
                 "components": [
                     {
                         "key": {
-                            "value": "\"name\"",
+                            "value": "\"transaction_id\"",
                             "mono": true
                         },
                         "description": {
-                            "value": "Friendly name for the entity",
+                            "value": "The unique integer identifier of the transaction you wish to update",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Number",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": 512415,
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"transaction_time\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "Time at which the transaction occured, or is to occur, in the format YYYY-MM-DD_HH24:MI:SS.US",
                             "mono": false
                         },
                         "type": {
@@ -266,11 +536,7 @@
                             "mono": false
                         },
                         "example": {
-                            "value": "\"Amatino Pty Ltd\"",
-                            "mono": true
-                        },
-                        "max char length": {
-                            "value": 1024,
+                            "value": "\"2017-01-07_17:22:16.51245\"",
                             "mono": true
                         }
                     },
@@ -280,7 +546,7 @@
                             "mono": true
                         },
                         "description": {
-                            "value": "A description of the entity",
+                            "value": "A friendly description of the transaction",
                             "mono": false
                         },
                         "type": {
@@ -288,69 +554,88 @@
                             "mono": false
                         },
                         "example": {
-                            "value": "\"A company devoted to creating great accounting products\"",
-                            "mono": true
+                            "value": "Receipt of payment for exquisite accounting services",
+                            "mono": false
                         },
                         "max char length": {
-                            "value": 4096,
+                            "value": 1024,
                             "mono": true
-                        }
+                        } 
                     },
                     {
                         "key": {
-                            "value": "\"region_name\"",
+                            "value": "\"global_unit_denomination\"",
                             "mono": true
                         },
                         "description": {
-                            "value": "The region in which the entity's data will be stored",
+                            "value": "The global unit in which this transaction is denominated, if desired. Either a custom or global unit must be specified.",
                             "mono": false
                         },
                         "type": {
-                            "value": "JSON String",
+                            "value": "JSON String or JSON Null",
                             "mono": false
                         },
                         "example": {
-                            "value": "\"Australia East 1\"",
+                            "value": "\"usd\"",
                             "mono": true
                         },
                         "source": {
-                            "value": "/regions",
+                            "value": "/units/list",
                             "mono": false,
-                            "link": "/documentation/regions"
+                            "link": "/documentation/unit_list"
                         }
                     },
                     {
                         "key": {
-                            "value": "permissions_graph",
+                            "value": "\"custom_unit_denomination\"",
                             "mono": true
                         },
                         "description": {
-                            "value": "A graph describing permissions for this entity",
+                            "value": "The custom unit in which this transaction is denominated, if desired. Either a custom or global unit must be specified.",
                             "mono": false
                         },
                         "type": {
-                            "value": "JSON Object",
+                            "value": "JSON String or JSON Null",
                             "mono": false
                         },
                         "example": {
-                            "value": {
-                                "user_id_1": {
-                                    "account_id_1": {
-                                        "read": true,
-                                        "write": false
-                                    },
-                                    "account_id_2": {
-                                        "read": true,
-                                        "write": true
-                                    }
-                                },
-                                "user_id_2": {
-                                    "account_id_1": {
-                                        "read": true,
-                                        "write": true
-                                    }
-                                }
-                            },
+                            "value": "\"xrp\"",
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "/custom_unit/list",
+                            "mono": false,
+                            "link": "/documentation/custom_unit_list"
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"entries\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "A list of entry objects that comprise the transaction",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "list objects": {
+                            "value": "Entry",
+                            "mono": false,
+                            "link": "/documentation/entries"
+                        },
+                        "example": {
+                            "value": "See <a href=\"/documentation/entries\" class=\"link\">Entries",
+                            "mono": false
+                        },
+                        "minimum length": {
+                            "value": 2,
+                            "mono": true
+                        },
+                        "maximum length": {
+                            "value": 100,
                             "mono": true
                         }
                     }
@@ -359,13 +644,13 @@
             "returns": {
                 "root": "list",
                 "components": {
-                    "object": "entity"
+                    "object": "transaction"
                 }
             }
         }, {
             "name": "Delete",
             "method": "DELETE",
-            "path": "/entities",
+            "path": "/transactions",
             "return_root_type": "JSON Array",
             "description": "Delete an entity or entities",
             "required_json_data": null,
@@ -383,8 +668,15 @@
                 {
                     "key": "entity_id",
                     "type": "string",
-                    "description": "An Amatino entity id",
+                    "description": "The entity id of the entity in which you wish to delete transactions",
                     "example": "oB3cjSNKXklkJ4Tb",
+                    "repeatable": false
+                },
+                {
+                    "key": "transaction_id",
+                    "type": "Integer",
+                    "description": "The transaction id or ids of the transaction(s) you wish to delete",
+                    "example": 151,
                     "repeatable": true
                 }
             ],
@@ -393,19 +685,19 @@
                 "components": [
                     {
                         "key": {
-                            "value": "\"entity_id\"",
+                            "value": "\"transaction_id\"",
                             "mono": true
                         },
                         "type": {
-                            "value": "JSON String",
+                            "value": "JSON Number",
                             "mono": false
                         },
                         "description": {
-                            "value": "The ID of a deleted entity",
+                            "value": "The id of a deleted transaction",
                             "mono": false
                         },
                         "example": {
-                            "value": "\"oB3cjSNKXklkJ4Tb\"",
+                            "value": 151,
                             "mono": true
                         }
                     }
@@ -414,8 +706,8 @@
         }, {
             "name": "Restore",
             "method": "PATCH",
-            "path": "/entities",
-            "description": "Restore a deleted entity or entities",
+            "path": "/transactions",
+            "description": "Restore a deleted transaction or transactions",
             "required_json_data": null,
             "required_headers": [
                 {
@@ -431,15 +723,22 @@
                 {
                     "key": "entity_id",
                     "type": "string",
-                    "description": "An Amatino entity id",
+                    "description": "The id of the entity in which you would like to restore transactions",
                     "example": "oB3cjSNKXklkJ4Tb",
+                    "repeatable": false
+                },
+                {
+                    "key": "transaction_id",
+                    "type": "Integer",
+                    "description": "The transaction id or ids of the transaction(s) you wish to restore",
+                    "example": 151,
                     "repeatable": true
                 }
             ],
             "returns": {
                 "root": "list",
                 "components": {
-                    "object": "entity"
+                    "object": "transaction"
                 }
             }
         }
