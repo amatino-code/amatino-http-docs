@@ -1,0 +1,447 @@
+{
+    "title": "Transactions",
+    "docpath": "transactions",
+    "introduction": [
+        "A Transaction is an exchange of value between two or more <a class=\"link\" href=\"/documentation/accounts\">Accounts</a>."
+    ],
+    "object": {
+        "name": "Transaction",
+        "exposition": "When returning a Transaction to you, Amatino uses the following JSON object structure.",
+        "form": {
+            "root": "list",
+            "components": [
+                {
+                    "key": {
+                        "value": "\"entity_id\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "A unique Amatino identifier for this entity",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"oB3cjSNKXklkJ4Tb\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"owner\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Number",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "A unique, integer identifier of the Amatino user who owns this entity",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": 9523413,
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"description\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "A description of the entity",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"A company devoted to creating great accounting products\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"permissions_graph\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Object",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "A description of the permissions granted to Amatino users with respect to this entity.",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": {
+                            "5235891": {
+                                "56": {
+                                    "read": true,
+                                    "write": true
+                                },
+                                "725": {
+                                    "read": true,
+                                    "write": false
+                                }
+                            },
+                            "9523413": {
+                                "56": {
+                                    "read": true,
+                                    "write": false
+                                }
+                            }
+                        },
+                        "mono": true
+                    }
+                }
+            ]
+        }
+    },
+    "actions": [
+        {
+            "name": "Create",
+            "method": "POST",
+            "path": "/entities",
+            "description": "Create a new entity or entities",
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your Amatino request signature"
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An Amatino session id"
+                }
+            ],
+            "required_url_parameters": null,
+            "return_root_type": "JSON Array",
+            "required_json_data": {
+                "root": "list",
+                "max_length": 10,
+                "components": [
+                    {
+                        "key": {
+                            "value": "\"name\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "Friendly name of the entity",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "string",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"Amatino Pty Ltd\"",
+                            "mono": true
+                        },
+                        "max char length": {
+                            "value": 1024,
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"description\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "A friendly description of the entity",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "A company devoted to creating great accounting products",
+                            "mono": false
+                        },
+                        "max char length": {
+                            "value": 4096,
+                            "mono": true
+                        } 
+                    },
+                    {
+                        "key": {
+                            "value": "\"region name\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The region in which the entity's data will be stored",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"Australia East 1\"",
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "/regions",
+                            "mono": false,
+                            "link": "/documentation/regions"
+                        }
+                    }
+                ]
+            },
+            "returns": {
+                "root": "list",
+                "components": {
+                    "object": "entity"
+                }
+            }
+        }, {
+            "name": "Retrieve",
+            "method": "GET",
+            "path": "/entities",
+            "description": "Retrieve metadata describing an entity or entities",
+            "return_root_type": "JSON Array",
+            "required_json_data": null,
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your Amatino request signature"
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An Amatino session id"
+                }
+            ],
+            "required_url_parameters": [
+                {
+                    "key": "entity_id",
+                    "type": "string",
+                    "description": "An Amatino entity id",
+                    "example": "oB3cjSNKXklkJ4Tb",
+                    "repeatable": true
+                }
+            ],
+            "returns": {
+                "root": "list",
+                "components": {
+                    "object": "entity"
+                }
+            }
+        }, {
+            "name": "Update",
+            "method": "PUT",
+            "path": "/entities",
+            "return_root_type": "JSON Array",
+            "description": "Update metadata of an existing entity or entities",
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your Amatino request signature"
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An Amatino session id"
+                }
+            ],
+            "required_url_parameters": null,
+            "required_json_data": {
+                "root": "list",
+                "max_length": 10,
+                "components": [
+                    {
+                        "key": {
+                            "value": "\"name\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "Friendly name for the entity",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"Amatino Pty Ltd\"",
+                            "mono": true
+                        },
+                        "max char length": {
+                            "value": 1024,
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"description\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "A description of the entity",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"A company devoted to creating great accounting products\"",
+                            "mono": true
+                        },
+                        "max char length": {
+                            "value": 4096,
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"region_name\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The region in which the entity's data will be stored",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"Australia East 1\"",
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "/regions",
+                            "mono": false,
+                            "link": "/documentation/regions"
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "permissions_graph",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "A graph describing permissions for this entity",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Object",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": {
+                                "user_id_1": {
+                                    "account_id_1": {
+                                        "read": true,
+                                        "write": false
+                                    },
+                                    "account_id_2": {
+                                        "read": true,
+                                        "write": true
+                                    }
+                                },
+                                "user_id_2": {
+                                    "account_id_1": {
+                                        "read": true,
+                                        "write": true
+                                    }
+                                }
+                            },
+                            "mono": true
+                        }
+                    }
+                ]
+            },
+            "returns": {
+                "root": "list",
+                "components": {
+                    "object": "entity"
+                }
+            }
+        }, {
+            "name": "Delete",
+            "method": "DELETE",
+            "path": "/entities",
+            "return_root_type": "JSON Array",
+            "description": "Delete an entity or entities",
+            "required_json_data": null,
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your Amatino request signature"
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An Amatino session id"
+                }
+            ],
+            "required_url_parameters": [
+                {
+                    "key": "entity_id",
+                    "type": "string",
+                    "description": "An Amatino entity id",
+                    "example": "oB3cjSNKXklkJ4Tb",
+                    "repeatable": true
+                }
+            ],
+            "returns": {
+                "root": "list",
+                "components": [
+                    {
+                        "key": {
+                            "value": "\"entity_id\"",
+                            "mono": true
+                        },
+                        "type": {
+                            "value": "JSON String",
+                            "mono": false
+                        },
+                        "description": {
+                            "value": "The ID of a deleted entity",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"oB3cjSNKXklkJ4Tb\"",
+                            "mono": true
+                        }
+                    }
+                ]
+            }
+        }, {
+            "name": "Restore",
+            "method": "PATCH",
+            "path": "/entities",
+            "description": "Restore a deleted entity or entities",
+            "required_json_data": null,
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your Amatino request signature"
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An Amatino session id"
+                }
+            ],
+            "required_url_parameters": [
+                {
+                    "key": "entity_id",
+                    "type": "string",
+                    "description": "An Amatino entity id",
+                    "example": "oB3cjSNKXklkJ4Tb",
+                    "repeatable": true
+                }
+            ],
+            "returns": {
+                "root": "list",
+                "components": {
+                    "object": "entity"
+                }
+            }
+        }
+    ]
+}

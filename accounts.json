@@ -1,0 +1,843 @@
+{
+    "title": "Accounts",
+    "docpath": "accounts",
+    "introduction": [
+        "An Amatino Account is collection of related economic activity. For example, an Account might represent a bank account, income from a particular client, or entity equity. Many Accounts together compose an <a class=\"link\" href=\"\\documentation\\entities\">Entity</a>.",
+        "Accounts themselves are composed of <a class=\"link\" href=\"\\documentation\\transactions\">Transactions</a>, and the sum of constituent transactions yield an <a class=\"link\" href=\"\\documentation\\accounts\\balance\">Account Balance</a>\"",
+        "The Accounts that compose an Entity may be viewed together as part of the <a class=\"link\" href=\"\\documentation\\tree\">Tree</a>."
+    ],
+    "object": {
+        "name": "Account",
+        "exposition": "When returning an Account to you, Amatino uses the following JSON object structure.",
+        "form": {
+            "root": "list",
+            "components": [
+                {
+                    "key": {
+                        "value": "\"account_id\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Number",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "An identifier for this account, unique within an entity",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": 42,
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"name\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "A friendly name for this account",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"Subscription Income\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"type\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The type of the account, one of asset, liability, income, expense, or equity.",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"income\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"parent_account_id\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Number",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "Identifier for this account's parent, unique within an entity.",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": 69,
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"unit\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String or JSON Null",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "Identifier of this account's denominating global unit, if one exists",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"usd\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"custom_unit\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String or JSON Null",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "Identifier of this account's denominating custom unit, if one exists",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"xrp\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"counterparth_entity_id\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String or JSON Null",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "Universally unique identifier of a counterparty entity, if one exists",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"oB3cjSNKXklkJ4Tb\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"description\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "Friendly description of this account",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"Revenue from sale of double-entry accounting services\"",
+                        "mono": true
+                    }
+                }, 
+                {
+                    "key": {
+                        "value": "\"color\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "Hex-color value for this account",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"#42f4df\"",
+                        "mono": true
+                    }
+                }
+            ]
+        }
+    },
+    "actions": [
+        {
+            "name": "Create",
+            "method": "POST",
+            "path": "/accounts",
+            "description": "Create a new account or account",
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your Amatino request signature"
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An Amatino session id"
+                }
+            ],
+            "required_url_parameters": [
+                {
+                    "key": "entity_id",
+                    "type": "string",
+                    "description": "The entity_id of the entity in which to create the account(s)",
+                    "example": "oB3cjSNKXklkJ4Tb",
+                    "repeatable": false
+                }
+            ],
+            "return_root_type": "JSON Array",
+            "required_json_data": {
+                "root": "list",
+                "max_length": 10,
+                "components": [
+                    {
+                        "key": {
+                            "value": "\"name\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "Friendly name for the new account",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "string",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"Subscription Income\"",
+                            "mono": true
+                        },
+                        "max char length": {
+                            "value": 1024,
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"type\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The fundamental account type",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"income\"",
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "/constants/account_types",
+                            "mono": false,
+                            "link": "/documentation/account_types"
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"parent_account_id\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The parent of this new account",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Number or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": 42,
+                            "mono": true
+                        },
+                        "note": {
+                            "value": "Specify null to add a top-level account"
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"unit\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The global unit denomination of this new account, if desired",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"usd\"",
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "/unit/list",
+                            "mono": false,
+                            "link": "/documentation/unit"
+                        },
+                        "note": {
+                            "value": "An account must either either specify a global unit or a custom unit, but not both"
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"custom_unit\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The custom unit denomination of this new account, if desired",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"xrp\"",
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "/custom_unit/list",
+                            "mono": false,
+                            "link": "/documentation/custom_unit"
+                        },
+                        "note": {
+                            "value": "An account must either either specify a global unit or a custom unit, but not both"
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"counterparty_entity_id\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "An entity id of an entity that is counterparty of this new account, if desired",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"oB3cjSNKXklkJ4Tb\"",
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"description\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "Friendly description of the new account",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"Revenue from sale of double-entry accounting services\"",
+                            "mono": true
+                        },
+                        "max char length": {
+                            "value": 1024,
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"color\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "Hex-color value for this account",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"#42f4df\"",
+                            "mono": true
+                        },
+                        "note": {
+                            "value": "Accounts created with a null color value will default to #FFFFFF",
+                            "mono": false
+                        }
+                    }
+                ]
+            },
+            "returns": {
+                "root": "list",
+                "components": {
+                    "object": "account"
+                }
+            }
+        }, {
+            "name": "Retrieve",
+            "method": "GET",
+            "path": "/accounts",
+            "description": "Retrieve metadata describing an account or accounts",
+            "return_root_type": "JSON Array",
+            "required_json_data": null,
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your Amatino request signature"
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An Amatino session id"
+                }
+            ],
+            "required_url_parameters": [
+                {
+                    "key": "entity_id",
+                    "type": "string",
+                    "description": "An Amatino entity id",
+                    "example": "oB3cjSNKXklkJ4Tb",
+                    "repeatable": false
+                },
+                {
+                    "key": "account_id",
+                    "type": "integer",
+                    "description": "The ID of the account(s) you wish to retrieve",
+                    "example": 42,
+                    "repeatable": true
+                }
+            ],
+            "returns": {
+                "root": "list",
+                "components": {
+                    "object": "account"
+                }
+            }
+        }, {
+            "name": "Update",
+            "method": "PUT",
+            "path": "/accounts",
+            "return_root_type": "JSON Array",
+            "description": "Update metadata of an existing account or accounts",
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your Amatino request signature"
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An Amatino session id"
+                }
+            ],
+            "required_url_parameters": [
+                {
+                    "key": "entity_id",
+                    "type": "string",
+                    "description": "The entity_id of the entity in which to update an account or accounts",
+                    "example": "oB3cjSNKXklkJ4Tb",
+                    "repeatable": false
+                }
+            ],
+            "required_json_data": {
+                "root": "list",
+                "max_length": 10,
+                "components": [
+                    {
+                        "key": {
+                            "value": "\"account_id\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The ID of the account you wish to update",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "integer",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": 42,
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"name\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "Friendly name for the account",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "string",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"Subscription Income\"",
+                            "mono": true
+                        },
+                        "max char length": {
+                            "value": 1024,
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"type\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The fundamental account type",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"income\"",
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "/constants/account_types",
+                            "mono": false,
+                            "link": "/documentation/account_types"
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"parent_account_id\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The parent of this account",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Number or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": 42,
+                            "mono": true
+                        },
+                        "note": {
+                            "value": "Specify null to add a top-level account"
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"unit\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The global unit denomination of this account, if desired",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"usd\"",
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "/unit/list",
+                            "mono": false,
+                            "link": "/documentation/unit"
+                        },
+                        "note": {
+                            "value": "An account must either either specify a global unit or a custom unit, but not both"
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"custom_unit\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The custom unit denomination of this account, if desired",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"xrp\"",
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "/custom_unit/list",
+                            "mono": false,
+                            "link": "/documentation/custom_unit"
+                        },
+                        "note": {
+                            "value": "An account must either either specify a global unit or a custom unit, but not both"
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"counterparty_entity_id\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "An entity id of an entity that is counterparty of this account, if desired",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"oB3cjSNKXklkJ4Tb\"",
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"description\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "Friendly description of the account",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"Revenue from sale of double-entry accounting services\"",
+                            "mono": true
+                        },
+                        "max char length": {
+                            "value": 1024,
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"color\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "Hex-color value for this account",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"#42f4df\"",
+                            "mono": true
+                        },
+                        "note": {
+                            "value": "Accounts updated with a null color value will default to #FFFFFF",
+                            "mono": false
+                        }
+                    }
+                ]
+            },
+            "returns": {
+                "root": "list",
+                "components": {
+                    "object": "account"
+                }
+            }
+        }, {
+            "name": "Delete",
+            "method": "DELETE",
+            "path": "/accounts",
+            "return_root_type": "JSON Array",
+            "description": "Delete an account or accounts",
+            "required_json_data": {
+                "root": "list",
+                "max_length": 10,
+                "components": [
+                    {
+                        "key": {
+                            "value": "\"target_account_id\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The ID of the account you wish to delete",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Number",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": 42,
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"entry_replacement_account_id\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The ID of the account into which entries party to the target should be moved",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Number",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": 99,
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"delete_children\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "Specify true to recursively delete all child accounts of the target account",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Boolean",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": false,
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"new_parent_account_id\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "Specify the new parent of any immediate child accounts of the target account, if desired",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Number or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": 99,
+                            "mono": true
+                        },
+                        "note": {
+                            "value": "Specify null to cause immediate child accounts to become top-level accounts",
+                            "mono": false
+                        }
+                    }
+                ]
+            },
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your Amatino request signature"
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An Amatino session id"
+                }
+            ],
+            "required_url_parameters": [
+                {
+                    "key": "entity_id",
+                    "type": "string",
+                    "description": "The entity_id of the entity in which to delete an account or accounts",
+                    "example": "oB3cjSNKXklkJ4Tb",
+                    "repeatable": false
+                }
+            ],
+            "returns": {
+                "root": "list",
+                "components": [
+                    {
+                        "key": {
+                            "value": "\"account_id\"",
+                            "mono": true
+                        },
+                        "type": {
+                            "value": "JSON Number",
+                            "mono": false
+                        },
+                        "description": {
+                            "value": "The ID of a deleted account",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": 42,
+                            "mono": true
+                        }
+                    }
+                ]
+            }
+        }, {
+            "name": "Restore",
+            "method": "PATCH",
+            "path": "/accounts",
+            "return_root_type": "JSON Array",
+            "description": "Restore a deleted account or accounts",
+            "required_json_data": null,
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your Amatino request signature"
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An Amatino session id"
+                }
+            ],
+            "required_url_parameters": [
+                {
+                    "key": "entity_id",
+                    "type": "string",
+                    "description": "The ID of the entity in which to restore accounts",
+                    "example": "oB3cjSNKXklkJ4Tb",
+                    "repeatable": false
+                },
+                {
+                    "key": "account_id",
+                    "type": "integer",
+                    "description": "The ID of the account(s) you wish to restore",
+                    "example": 42,
+                    "repeatable": true
+                }
+            ],
+            "returns": {
+                "root": "list",
+                "components": {
+                    "object": "account"
+                }
+            }
+        }
+    ]
+}
