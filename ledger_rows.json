@@ -1,0 +1,170 @@
+{
+    "title": "Ledger Row",
+    "docpath": "ledger_row",
+    "introduction": [
+        "A Ledger Row is a specialised view of a <a class=\"link\" href=\"/documentation/transactions\">Transaction</a>, delivered as part of a <a class=\"link\" href=\"/documentation/ledgers\">Ledger</a> or <a class=\"link\" href=\"/documentation/recursive_ledger\">Recursive Ledger</a>. The Ledger Row describes a Tranasction from the perspective of the <a class=\"link\" href=\"/documentation/accounts\">Account</a> targeted by the controlling Ledger or Recursive Ledger.",
+        "When consuming the Amatino API, you will never encounter a Ledger Row on its own. They are only ever delivered under the <span class=\"monospace\">ledger_rows</span> key as part of a Ledger or Recursive Ledger object." 
+    ],
+    "object": {
+        "name": "Ledger Row",
+        "exposition": "Amatino will deliver Ledger Rows with the following object structure",
+        "form": {
+            "root": "list",
+            "components": [
+                {
+                    "key": {
+                        "value": "\"transaction_id\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Number",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The integer identifier of the <a class=\"link\" href=\"/documentation/transactions\">Transaction</a> this Ledger Row describes.",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": 320932,
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"transaction_time\"",
+                        "mono": true
+                    },
+                    "description": {
+                        "value": "Time at which the described <a class=\"link\" href=\"/documentation/transactions\">Transaction</a> occured, or is to occur, in the format YYYY-MM-DD_HH24:MI:SS.US, at UTC",
+                        "mono": false
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"2017-01-07_17:22:16.51245\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"description\"",
+                        "mono": true
+                    },
+                    "description": {
+                        "value": "A friendly description of the <a class=\"link\" href=\"/documentation/transactions\">Transaction</a>",
+                        "mono": false
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "Receipt of payment for exquisite accounting services",
+                        "mono": false
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"opposing_account_id\"",
+                        "mono": true
+                    },
+                    "description": {
+                        "value": "The unique integer id of the <a class=\"link\" href=\"/documentation/accounts\">Account</a> debited or credited in opposition to the target Account",
+                        "mono": false
+                    },
+                    "type": {
+                        "value": "JSON Number or JSON Null",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": 42,
+                        "mono": false
+                    },
+                    "note": {
+                        "value": "If the <a class=\"link\" href=\"/documentation/transactions\">Transaction</a> described features more than two <a class=\"link\" href=\"/documentation/entries\">Entries</a>, <span class=\"monospace\">opposing_account_id</span> will return <span class=\"monospace\">null</span>." ,
+                        "mono": false
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"opposing_account_name\"",
+                        "mono": true
+                    },
+                    "description": {
+                        "value": "The name of the <a class=\"link\" href=\"/documentation/accounts\">Account</a> debited or credited in opposition to the target Account",
+                        "mono": false
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "Accounts Receivable",
+                        "mono": false
+                    },
+                    "note": {
+                        "value": "If the Transaction described features more than two <a class=\"link\" href=\"/documentation/entries\">Entries</a>, <span class=\"monospace\">opposing_account_name</span> will return <span class=\"monospace\">\"[Split Transaction]\"</span>." ,
+                        "mono": false
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"debit\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The debit value of the described <a class=\"link\" href=\"/documentation/transactions\">Transaction</a>.",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"0.00\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"credit\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The credit value of the described <a class=\"link\" href=\"/documentation/transactions\">Transaction</a>.",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"23,125.95\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"balance\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The running total balance of the target <a class=\"link\" href=\"/documentation/accounts\">Account</a>, at the time of this <a class=\"link\" href=\"/documentation/transactions\">Transaction</a>",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"12,492,532.33\"",
+                        "mono": true
+                    }
+                }
+            ]
+        }
+    },
+    "actions": null
+}

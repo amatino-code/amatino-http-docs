@@ -1,0 +1,64 @@
+{
+    "title": "Types",
+    "docpath": "constants/types",
+    "introduction": [
+        "Double-entry accounting divides accounts into five fundamental types: Assets, liabilities, equities, incomes and expenses. Throughout Amatino, these five constants are referred to as Types.",
+        "You will most often encounter Types when creating <a class=\"link\" href=\"/documentation/accounts\">Accounts</a>. Erstwhile, most of the work that Types do occurs behind the scenes, and you won't need to interact with them directly.",
+        "While you can retrieve the five Types with a GET request, they are unchanging and it is safe to hard-code them into your application.",
+        "Under the hood, Types allow Amatino to maintain the <a class=\"link\" href=\"/articles/fundamental-equality\">Fundamental Double-Entry Equality</a>."
+    ],
+    "object": {
+        "name": "Type",
+        "exposition": "Type objects are returned with the following structure",
+        "form": {
+            "root": "list",
+            "components": [
+                {
+                    "key": {
+                        "value": "\"name\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "Either <span class=\"monospace\">assets</span>, <span class=\"monospace\">liability</span>, <span class=\"monospace\">equity</span>, <span class=\"monospace\">income</span> or <span class=\"monospace\">expense</span>",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"asset\"",
+                        "mono": true
+                    }
+                }
+            ]
+        }
+    },
+    "actions": [
+        {
+            "name": "Retrieve",
+            "method": "GET",
+            "path": "/constants/account_types",
+            "description": "Retrieve the Amatino Type constants",
+            "return_root_type": "JSON Array",
+            "required_json_data": null,
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature"
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID"
+                }
+            ],
+            "required_url_parameters": null,
+            "returns": {
+                "root": "list",
+                "components": {
+                    "object": "type"
+                }
+            }
+        }
+    ]
+}

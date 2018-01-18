@@ -1,0 +1,264 @@
+{
+    "title": "Balance",
+    "docpath": "accounts/balance",
+    "introduction": [
+        "A Balance represents the sum total value of all <a class=\"link\" href=\"/documentation/transactions\">Transactions</a> party to an <a href=\"/documentation/accounts\">Account</a>."
+        ],
+    "object": {
+        "name": "Balance",
+        "exposition": "The Amatino API returns Balance objects with the following structure",
+        "form": {
+            "root": "list",
+            "components": [
+                {
+                    "key": {
+                        "value": "\"account_id\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Number",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "An integer identifier of the <a class=\"link\" href=\"/documentation/accounts\"Account</a> this Balance describes",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": 42,
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"balance_time\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "Time of the balance, in the format YYYY-MM-DD_HH24:MI:SS.US, in UTC.",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"2017-01-01_17:22:16.40288\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"generated_time\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "Time that this Balance was computed, in the format YYYY-MM-DD_HH24:MI:SS.US",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"2018-05-02_05:01:54.72941\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"recursive\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Boolean",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "A bool asserting that this is not a <a href=\"/documentation/recursive_ledger\">Recursive Balance</a>. Always <span class=\"monospace\">false</span>",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": false,
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"global_unit_denomination\"",
+                        "mono": true
+                    },
+                    "description": {
+                        "value": "The global unit in which this Balance is denominated, if applicable",
+                        "mono": false
+                    },
+                    "type": {
+                        "value": "JSON String or JSON Null",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"usd\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"custom_unit_denomination\"",
+                        "mono": true
+                    },
+                    "description": {
+                        "value": "The custom unit in which this Balance is denominated, if applicable.",
+                        "mono": false
+                    },
+                    "type": {
+                        "value": "JSON String or JSON Null",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"xrp\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"balance\"",
+                        "mono": true
+                    },
+                    "description": {
+                        "value": "The magnitude of the account balance",
+                        "mono": false
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"23,125.95\"",
+                        "mono": true
+                    }
+                }
+            ]
+        }
+    },
+    "actions": [
+        {
+            "name": "Retrieve",
+            "method": "GET",
+            "path": "/accounts/balance",
+            "description": "Retrieve a Balance for an account or accounts",
+            "return_root_type": "JSON Array",
+            "required_json_data": {
+                "root": "list",
+                "max_length": 10,
+                "components": [
+                    {
+                        "key": {
+                            "value": "\"account_id\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The unique integer identifier of the Account for which you would like to retrieve a Balance",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Number",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": 42,
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"balance_time\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The time at which to balance the target Account. Specify JSON Null to compute the balance at the time of the request",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"2018-01-01_00:00:00.00000\"",
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"global_unit_denomination\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The global unit denomination in which you would like to view the Ledger, if desired. Specify JSON Null both here and in the custom unit to retrieve the transaction in the target Account's native unit.",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"eur\"",
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "/units/list",
+                            "mono": false,
+                            "link": "/documentation/unit_list"
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"custom_unit_denomination\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The custom unit denomination in which you would like to view the Ledger, if desired. Specify JSON Null both here and in the custom unit to retrieve the transaction in the target Account's native unit.",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"btc\"",
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "/custom_units/list",
+                            "mono": false,
+                            "link": "/documentation/custom_unit_list"
+                        }
+                    }
+                ]
+            },
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature"
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID"
+                }
+            ],
+            "required_url_parameters": [
+                {
+                    "key": "entity_id",
+                    "type": "string",
+                    "description": "The entity id of the entity from which you wish to retrieve a Balance",
+                    "example": "oB3cjSNKXklkJ4Tb",
+                    "repeatable": false
+                }
+            ],
+            "returns": {
+                "root": "list",
+                "components": {
+                    "object": "side"
+                }
+            }
+        }
+    ]
+}

@@ -235,7 +235,7 @@
                             "mono": true
                         },
                         "description": {
-                            "value": "The fundamental account type",
+                            "value": "The fundamental account Type",
                             "mono": false
                         },
                         "type": {
@@ -509,7 +509,7 @@
                             "mono": true
                         },
                         "description": {
-                            "value": "The fundamental account type",
+                            "value": "The account <a class=\"link\" href=\"/documentation/constants/types\">Type</a>",
                             "mono": false
                         },
                         "type": {
@@ -523,7 +523,7 @@
                         "source": {
                             "value": "/constants/account_types",
                             "mono": false,
-                            "link": "/documentation/account_types"
+                            "link": "/documentation/constants/types"
                         }
                     },
                     {

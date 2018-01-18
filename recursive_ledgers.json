@@ -1,0 +1,361 @@
+{
+    "title": "Recursive Ledgers",
+    "docpath": "accounts/recursive_ledger",
+    "introduction": [
+        "A Recursive Ledger is a list of <a class=\"link\" href=\"/documentation/transactions\">Transaction</a> from the perspective of a particular <a class=\"link\" href=\"/documentation/accounts\">Account</a>, and all the Transactions party to all child Accounts of that Account. Recursive Ledgers are ordered by Transaction time, and include a running Account Balance for every line.",
+        "If you request a Recursive Ledger in a unit other than the target Account native unit, or if child Accounts feature heterogenous units, Amatino will compute and return unrealised gains and losses. Find out more in the <a href=\"/articles/unrealised_gains_losses\">Unrealised Gains and Losses article</a>",
+        "Amatino will return a maximum total of 1,000 Ledger Rows per retrieval request. If the Ledger you define spans more than 1,000 rows, it will be broken into pages you can retrieve seperately."
+    ],
+    "object": {
+        "name": "Ledger",
+        "exposition": "The Amatino API returns Recursive Ledger objects with the following structure",
+        "form": {
+            "root": "list",
+            "components": [
+                {
+                    "key": {
+                        "value": "\"account_id\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Number",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "An integer identifier of the <a class=\"link\" href=\"/documentation/accounts\"Account this Ledger describes",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": 42,
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"start_time\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "Time at which the ledger starts, in the format YYYY-MM-DD_HH24:MI:SS.US",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"2017-01-01_17:22:16.00000\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"end_time\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "Time at which the ledger ends, in the format YYYY-MM-DD_HH24:MI:SS.US",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"2018-02-07_17:22:16.51245\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"recursive\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Boolean",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "A bool asserting that this is a <a href=\"/documentation/recursive_ledger\">Recursive Ledger</a>. Always <span class=\"monospace\">true</span>",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": true,
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"generated_time\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "Time that this Ledger was computed, in the format YYYY-MM-DD_HH24:MI:SS.US",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"2018-05-02_05:01:54.72941\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"global_unit_denomination\"",
+                        "mono": true
+                    },
+                    "description": {
+                        "value": "The global unit in which this Ledger is denominated, if applicable",
+                        "mono": false
+                    },
+                    "type": {
+                        "value": "JSON String or JSON Null",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"usd\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"custom_unit_denomination\"",
+                        "mono": true
+                    },
+                    "description": {
+                        "value": "The custom unit in which this Ledger is denominated, if applicable.",
+                        "mono": false
+                    },
+                    "type": {
+                        "value": "JSON String or JSON Null",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"xrp\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"page\"",
+                        "mono": true
+                    },
+                    "description": {
+                        "value": "The page number covered by this ledger object",
+                        "mono": false
+                    },
+                    "type": {
+                        "value": "JSON Number",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": 2,
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"number_of_pages\"",
+                        "mono": true
+                    },
+                    "description": {
+                        "value": "The number of pages this Ledger covers, in total",
+                        "mono": false
+                    },
+                    "type": {
+                        "value": "JSON Number",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": 3,
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"ledger_rows\"",
+                        "mono": true
+                    },
+                    "description": {
+                        "value": "A list of <a href=\"/documentation/ledger_row\" class=\"link\">Ledger Row</a> objects",
+                        "mono": false
+                    },
+                    "type": {
+                        "value": "JSON Array",
+                        "mono": false
+                    },
+                    "list objects": {
+                        "value": "Ledger Row",
+                        "mono": false,
+                        "link": "/documentation/ledger_row"
+                    },
+                    "example": {
+                        "value": "See <a href=\"/documentation/ledger_row\" class=\"link\">Ledger Rows</a>",
+                        "mono": false
+                    }
+                }
+            ]
+        }
+    },
+    "actions": [
+        {
+            "name": "Retrieve",
+            "method": "GET",
+            "path": "/accounts/ledger/recursive",
+            "description": "Retrieve a Recursive Ledger for an account or accounts",
+            "return_root_type": "JSON Array",
+            "required_json_data": {
+                "root": "list",
+                "max_length": 10,
+                "components": [
+                    {
+                        "key": {
+                            "value": "\"account_id\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The unique integer identifier of the Account for which you would like to retrieve a Recursive Ledger",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Number",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": 42,
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"start_time\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The time at which the Recursive Ledger will start. Specify JSON Null to start at the first <a class=\"link\" href=\"/documentation/transactions\">Transaction</a>",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"2018-01-01_00:00:00.00000\"",
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"end_time\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The time at which the Recursive Ledger will end. Specify JSON Null to end at the last <a class=\"link\" href=\"/documentation/transactions\">Transaction</a>",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"2018-12-31_00:00:00.00000\"",
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"page\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The page to retrieve. Specify JSON Null to retrieve the first page.",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Number or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": 2,
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"global_unit_denomination\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The global unit in which you would like to denominate the Recursive Ledger, if desired. Specify JSON Null both here and in the custom unit to retrieve the transaction in the target Account's native unit.",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"eur\"",
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "/units/list",
+                            "mono": false,
+                            "link": "/documentation/unit_list"
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"custom_unit_denomination\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The custom unit denomination in which you would like to view the Ledger, if desired. Specify JSON Null both here and in the custom unit to retrieve the Ledger in the target Account's native unit.",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"btc\"",
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "/custom_units/list",
+                            "mono": false,
+                            "link": "/documentation/custom_unit_list"
+                        }
+                    }
+                ]
+            },
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature"
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID"
+                }
+            ],
+            "required_url_parameters": [
+                {
+                    "key": "entity_id",
+                    "type": "string",
+                    "description": "The entity id of the entity from which you wish to retrieve a Ledger",
+                    "example": "oB3cjSNKXklkJ4Tb",
+                    "repeatable": false
+                }
+            ],
+            "returns": {
+                "root": "list",
+                "components": {
+                    "object": "side"
+                }
+            }
+        }
+    ]
+}
