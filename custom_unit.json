@@ -1,0 +1,601 @@
+{
+    "title": "Custom Unit",
+    "category": "ancillary",
+    "docpath": "custom_unit",
+    "introduction": [
+        "Custom Units are units of account created by Amatino users. Their scope is limited to the <a class=\"link\" href=\"\\documentation\\entities\">Entity</a> in which they are created. They can be used anywhere a <a class=\"link\" href=\"\\documentation\\global_unit\">Global unit</a> would be used, allowing a user to denominate their <a class=\"link\" href=\"\\documentation\\transactions\">Transactions</a> and <a class=\"link\" href=\"\\documentation\\accounts\">Accounts</a> as they please.",
+        "Custom Unit identifiers must be unique with reference to each other, but need not be so with reference to Global Units. Therefore, it is possible to create a Custom Unit implementation of a Global Unit - For example, a <span class=\"monospace\">USD</span> Custom Unit using a preferred source of foreign exchange rates."
+    ],
+    "object": {
+        "name": "Custom Unit",
+        "exposition": "Amatino will return Custom Unit objects to you with the following structure",
+        "form": {
+            "root": "list",
+            "components": [
+                {
+                    "key": {
+                        "value": "\"code\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The unique identifier of this Custom Unit",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"xrp\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"name\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "A friendly long form name",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"Ripple Coin\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"priority\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Number",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "A sorting hint for GUI's displaying lists of Custom Units",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": 0,
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"description\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "A long-form description",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"Ripple Coin - A cryptocurrency\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"exponent\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Number",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The number of digits after the decimal point required to describe the smallest fraction of this Custom Unit",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": 6,
+                        "mono": true
+                    }
+                }
+            ]
+        }
+    },
+    "actions": [
+        {
+            "name": "Create",
+            "method": "POST",
+            "path": "/custom_unit",
+            "description": "Create a new Custom Unit",
+            "return_root_type": "JSON Array",
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature",
+                    "example": "\"yxATCPRKAAXHNiPctNQPHEGGVJF\"..."
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID",
+                    "example": 7449059267091272858
+                }
+            ],
+            "required_url_parameters": [
+                {
+                    "key": "entity_id",
+                    "type": "string",
+                    "description": "The entity_id of the <a class=\"link\" href=\"\\documentation\\entities\">Entity</a> in which to create the Custom Unit",
+                    "example": "oB3cjSNKXklkJ4Tb",
+                    "repeatable": false
+                }
+            ],
+            "required_json_data": {
+                "root": "list",
+                "max_length": 10,
+                "components": [
+                    {
+                        "key": {
+                            "value": "\"code\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "A unique identifier",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"xrp\"",
+                            "mono": true
+                        },
+                        "max char length": {
+                            "value": 64,
+                            "mono": true
+                        },
+                        "min char length": {
+                            "value": 3,
+                            "mono": true
+                        },
+                        "note": {
+                            "value": "Codes must be unique across all Custom Units in an <a class=\"link\" href=\"\\documentation\\entities\">Entity</a>",
+                            "mono": false
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"name\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "A friendly long form name",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"Ripple Coin\"",
+                            "mono": true
+                        },
+                        "max char length": {
+                            "value": 1024,
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"priority\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "A sorting hint for GUI's displaying lists of Custom Units",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Number or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": 10,
+                            "mono": true
+                        },
+                        "note": {
+                            "value": "Specifying JSON Null results in a default value of <span class=\"monospace\">0</span>",
+                            "mono": false
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"description\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "A long form description",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "Ripple Coin - A cryptocurrency",
+                            "mono": false
+                        },
+                        "max char length": {
+                            "value": 1024,
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"exponent\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The number of digits after the decimal point required to describe the smallest fraction of the Custom Unit",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Number",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": 6,
+                            "mono": true
+                        },
+                        "max": {
+                            "value": 6,
+                            "mono": true
+                        },
+                        "min": {
+                            "value": 0,
+                            "mono": true
+                        }
+                    }
+                ]
+            },
+            "returns": {
+                "root": "list",
+                "components": {
+                    "object": "custom unit"
+                }
+            }
+        },
+        {
+            "name": "Retrieve",
+            "method": "GET",
+            "path": "/custom_unit",
+            "description": "Retrieve metadata describing a Custom Unit, or Units.",
+            "return_root_type": "JSON Array",
+            "required_json_data": null,
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature",
+                    "example": "\"yxATCPRKAAXHNiPctNQPHEGGVJF\"..."
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID",
+                    "example": 7449059267091272858
+                }
+            ],
+            "required_url_parameters": [
+                {
+                    "key": "entity_id",
+                    "type": "string",
+                    "description": "The ID of the <a class=\"link\" href=\"\\documentation\\entities\">Entity</a> in which the target Custom Units reside",
+                    "example": "oB3cjSNKXklkJ4Tb",
+                    "repeatable": false
+                },
+                {
+                    "key": "code",
+                    "type": "string",
+                    "description": "The unique code of the Custom Unit you wish to retrieve",
+                    "example": "usd",
+                    "repeatable": true,
+                    "max repeats": 10
+                }
+            ],
+            "returns": {
+                "root": "list",
+                "components": {
+                    "object": "custom unit"
+                }
+            }
+        },
+        {
+            "name": "Update",
+            "method": "PUT",
+            "path": "/custom_unit",
+            "description": "Update data describing a Custom Unit or group of Custom Units",
+            "return_root_type": "JSON Array",
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature",
+                    "example": "\"yxATCPRKAAXHNiPctNQPHEGGVJF\"..."
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID",
+                    "example": 7449059267091272858
+                }
+            ],
+            "required_url_parameters": [
+                {
+                    "key": "entity_id",
+                    "type": "string",
+                    "description": "The ID of the <a class=\"link\" href=\"\\documentation\\entities\">Entity</a> in which the target Custom Units reside",
+                    "example": "oB3cjSNKXklkJ4Tb",
+                    "repeatable": false
+                }
+            ],
+            "required_json_data": {
+                "root": "list",
+                "max_length": 10,
+                "components": [
+                    {
+                        "key": {
+                            "value": "\"code\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The code of a Custom Unit you wish to update",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"xrp\"",
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"name\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "A friendly long form name",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"Ripple Coin\"",
+                            "mono": true
+                        },
+                        "max char length": {
+                            "value": 1024,
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"priority\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "A sorting hint for GUI's displaying lists of Custom Units",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Number or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": 10,
+                            "mono": true
+                        },
+                        "note": {
+                            "value": "Specifying JSON Null results in a default value of <span class=\"monospace\">0</span>",
+                            "mono": false
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"description\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "A long form description",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "Ripple Coin - A cryptocurrency",
+                            "mono": false
+                        },
+                        "max char length": {
+                            "value": 1024,
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"exponent\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The number of digits after the decimal point required to describe the smallest fraction of the Custom Unit",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Number",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": 6,
+                            "mono": true
+                        },
+                        "max": {
+                            "value": 6,
+                            "mono": true
+                        },
+                        "min": {
+                            "value": 0,
+                            "mono": true
+                        }
+                    }
+                ]
+            },
+            "returns": {
+                "root": "list",
+                "components": {
+                    "object": "custom unit"
+                }
+            }
+        },
+        {
+            "name": "Delete",
+            "method": "DELETE",
+            "path": "/custom_unit",
+            "description": "Delete a Custom Unit or group of Custom Units. Deleted Custom Units cannot be recovered, but their codes may be re-used.",
+            "return_root_type": "JSON Array",
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature",
+                    "example": "\"yxATCPRKAAXHNiPctNQPHEGGVJF\"..."
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID",
+                    "example": 7449059267091272858
+                }
+            ],
+            "required_url_parameters": [
+                {
+                    "key": "entity_id",
+                    "type": "string",
+                    "description": "The ID of the <a class=\"link\" href=\"\\documentation\\entities\">Entity</a> in which the target Custom Units reside",
+                    "example": "oB3cjSNKXklkJ4Tb",
+                    "repeatable": false
+                }
+            ],
+            "required_json_data": {
+                "root": "list",
+                "max_length": 10,
+                "components": [
+                    {
+                        "key": {
+                            "value": "\"target_custom_unit_code\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The code of a Custom Unit you wish to delete",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"xrp\"",
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"account_custom_unit_replacement\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The code of a Custom Unit that should replace the target Custom Unit in any Account or Transaction denominated by the target",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"btc\"",
+                            "mono": true
+                        },
+                        "note": {
+                            "value": "Supply at least one of either a Custom Unit replacement or Global Unit replacement, but not both",
+                            "mono": false
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"account_global_unit_replacement\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The code of a Global Unit that should replace the target Custom Unit in any Account or Transaction denominated by the target",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"usd\"",
+                            "mono": true
+                        },
+                        "note": {
+                            "value": "Supply at least one of either a Global Unit replacement or Custom Unit replacement, but not both",
+                            "mono": false
+                        }
+                    }
+                ]
+            },
+            "returns": {
+                "root": "list",
+                "components": [
+                    {
+                        "key": {
+                            "value": "\"deleted_custom_unit_code\"",
+                            "mono": true
+                        },
+                        "type": {
+                            "value": "JSON String",
+                            "mono": false
+                        },
+                        "description": {
+                            "value": "The code of a deleted custom unit",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"xrp\"",
+                            "mono": true
+                        }
+                    }, {
+                        "key": {
+                            "value": "\"updated_accounts\"",
+                            "mono": true
+                        },
+                        "type": {
+                            "value": "JSON Array of JSON Numbers",
+                            "mono": false
+                        },
+                        "description": {
+                            "value": "The IDs of any accounts whose denominating unit was updated by the deletion",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": [42, 69, 101],
+                            "mono": true
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

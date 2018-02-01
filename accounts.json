@@ -1,5 +1,6 @@
 {
-    "title": "Accounts",
+    "title": "Account",
+    "category": "primary",
     "docpath": "accounts",
     "introduction": [
         "An Amatino Account is collection of related economic activity. For example, an Account might represent a bank account, income from a particular client, or entity equity. Many Accounts together compose an <a class=\"link\" href=\"\\documentation\\entities\">Entity</a>.",
@@ -186,18 +187,20 @@
             "required_headers": [
                 {
                     "key": "X-Signature",
-                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature"
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature",
+                    "example": "\"yxATCPRKAAXHNiPctNQPHEGGVJF\"..."
                 },
                 {
                     "key": "X-Session-ID",
-                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID"
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID",
+                    "example": 7449059267091272858
                 }
             ],
             "required_url_parameters": [
                 {
                     "key": "entity_id",
                     "type": "string",
-                    "description": "The entity_id of the entity in which to create the account(s)",
+                    "description": "The entity_id of the <a class=\"link\" href=\"\\documentation\\entities\">Entity</a> in which to create the account(s)",
                     "example": "oB3cjSNKXklkJ4Tb",
                     "repeatable": false
                 }
@@ -405,11 +408,13 @@
             "required_headers": [
                 {
                     "key": "X-Signature",
-                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature"
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature",
+                    "example": "\"yxATCPRKAAXHNiPctNQPHEGGVJF\"..."
                 },
                 {
                     "key": "X-Session-ID",
-                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID"
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID",
+                    "example": 7449059267091272858
                 }
             ],
             "required_url_parameters": [
@@ -443,11 +448,13 @@
             "required_headers": [
                 {
                     "key": "X-Signature",
-                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature"
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature",
+                    "example": "\"yxATCPRKAAXHNiPctNQPHEGGVJF\"..."
                 },
                 {
                     "key": "X-Session-ID",
-                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID"
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID",
+                    "example": 7449059267091272858
                 }
             ],
             "required_url_parameters": [
@@ -760,11 +767,13 @@
             "required_headers": [
                 {
                     "key": "X-Signature",
-                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature"
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature",
+                    "example": "\"yxATCPRKAAXHNiPctNQPHEGGVJF\"..."
                 },
                 {
                     "key": "X-Session-ID",
-                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID"
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID",
+                    "example": 7449059267091272858
                 }
             ],
             "required_url_parameters": [
@@ -809,11 +818,13 @@
             "required_headers": [
                 {
                     "key": "X-Signature",
-                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature"
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature",
+                    "example": "\"yxATCPRKAAXHNiPctNQPHEGGVJF\"..."
                 },
                 {
                     "key": "X-Session-ID",
-                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID"
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID",
+                    "example": 7449059267091272858
                 }
             ],
             "required_url_parameters": [

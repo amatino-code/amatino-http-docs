@@ -1,5 +1,6 @@
 {
-    "title": "Entries",
+    "title": "Entry",
+    "category": "ancillary",
     "docpath": "entries",
     "introduction": [
         "Entries compose <a class=\"link\" href=\"/documentation/transactions\">Transactions</a>. An individual entry allocates some value to an <a class=\"link\" href=\"/documentation/account\">Account</a> as either one of the fundamental <a class=\"link\" href=\"/documentation/constants/sides\">Sides</a>: a debit or a credit. All together, those debits and credits will add up to zero, satisfying the fundamental double-entry accounting equality.",

@@ -1,5 +1,6 @@
 {
-    "title": "Sides",
+    "title": "Side",
+    "category": "ancillary",
     "docpath": "constants/sides",
     "introduction": [
         "Sides are Amatino's name for the fundamental double-entry bookeeping building blocks, the debit and credit. They are constant and unchanging, so while you can retrieve them with a GET request, you can also safely hard-code them into your application.",

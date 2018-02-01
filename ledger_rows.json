@@ -1,5 +1,6 @@
 {
     "title": "Ledger Row",
+    "category": "ancillary",
     "docpath": "ledger_row",
     "introduction": [
         "A Ledger Row is a specialised view of a <a class=\"link\" href=\"/documentation/transactions\">Transaction</a>, delivered as part of a <a class=\"link\" href=\"/documentation/ledgers\">Ledger</a> or <a class=\"link\" href=\"/documentation/recursive_ledger\">Recursive Ledger</a>. The Ledger Row describes a Tranasction from the perspective of the <a class=\"link\" href=\"/documentation/accounts\">Account</a> targeted by the controlling Ledger or Recursive Ledger.",
