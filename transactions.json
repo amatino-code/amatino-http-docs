@@ -691,26 +691,9 @@
             ],
             "returns": {
                 "root": "list",
-                "components": [
-                    {
-                        "key": {
-                            "value": "\"transaction_id\"",
-                            "mono": true
-                        },
-                        "type": {
-                            "value": "JSON Number",
-                            "mono": false
-                        },
-                        "description": {
-                            "value": "The id of a deleted transaction",
-                            "mono": false
-                        },
-                        "example": {
-                            "value": 151,
-                            "mono": true
-                        }
-                    }
-                ]
+                "components": {
+                    "object": "transaction"
+                }
             }
         }, {
             "name": "Restore",
