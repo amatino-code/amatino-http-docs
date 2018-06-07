@@ -1,7 +1,7 @@
 {
     "title": "Custom Unit",
     "category": "ancillary",
-    "docpath": "custom_unit",
+    "docpath": "custom_units",
     "introduction": [
         "Custom Units are units of account created by Amatino users. Their scope is limited to the <a class=\"link\" href=\"\\documentation\\entities\">Entity</a> in which they are created. They can be used anywhere a <a class=\"link\" href=\"\\documentation\\global_unit\">Global unit</a> would be used, allowing a user to denominate their <a class=\"link\" href=\"\\documentation\\transactions\">Transactions</a> and <a class=\"link\" href=\"\\documentation\\accounts\">Accounts</a> as they please.",
         "Custom Unit identifiers must be unique with reference to each other, but need not be so with reference to Global Units. Therefore, it is possible to create a Custom Unit implementation of a Global Unit - For example, a <span class=\"monospace\">USD</span> Custom Unit using a preferred source of foreign exchange rates."
@@ -109,7 +109,7 @@
         {
             "name": "Create",
             "method": "POST",
-            "path": "/custom_unit",
+            "path": "/custom_units",
             "description": "Create a new Custom Unit",
             "return_root_type": "JSON Array",
             "required_headers": [
@@ -271,7 +271,7 @@
         {
             "name": "Retrieve",
             "method": "GET",
-            "path": "/custom_unit",
+            "path": "/custom_units",
             "description": "Retrieve metadata describing a Custom Unit, or Units.",
             "return_root_type": "JSON Array",
             "required_json_data": null,
@@ -314,7 +314,7 @@
         {
             "name": "Update",
             "method": "PUT",
-            "path": "/custom_unit",
+            "path": "/custom_units",
             "description": "Update data describing a Custom Unit or group of Custom Units",
             "return_root_type": "JSON Array",
             "required_headers": [
@@ -464,7 +464,7 @@
         {
             "name": "Delete",
             "method": "DELETE",
-            "path": "/custom_unit",
+            "path": "/custom_units",
             "description": "Delete a Custom Unit or group of Custom Units. Deleted Custom Units cannot be recovered, but their codes may be re-used.",
             "return_root_type": "JSON Array",
             "required_headers": [
