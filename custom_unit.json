@@ -22,7 +22,7 @@
                         "mono": false
                     },
                     "description": {
-                        "value": "The unique identifier of this Custom Unit",
+                        "value": "The unique identifier of this Custom Unit. Coerced to lowercase",
                         "mono": false
                     },
                     "example": {
@@ -143,7 +143,7 @@
                             "mono": true
                         },
                         "description": {
-                            "value": "A unique identifier",
+                            "value": "A unique identifier. Coerced to lowercase",
                             "mono": false
                         },
                         "type": {
