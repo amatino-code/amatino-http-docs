@@ -3,8 +3,8 @@
     "category": "ancillary",
     "docpath": "custom_units",
     "introduction": [
-        "Custom Units are units of account created by Amatino users. Their scope is limited to the <a class=\"link\" href=\"\\documentation\\entities\">Entity</a> in which they are created. They can be used anywhere a <a class=\"link\" href=\"\\documentation\\global_unit\">Global unit</a> would be used, allowing a user to denominate their <a class=\"link\" href=\"\\documentation\\transactions\">Transactions</a> and <a class=\"link\" href=\"\\documentation\\accounts\">Accounts</a> as they please.",
-        "Custom Unit identifiers must be unique with reference to each other, but need not be so with reference to Global Units. Therefore, it is possible to create a Custom Unit implementation of a Global Unit - For example, a <span class=\"monospace\">USD</span> Custom Unit using a preferred source of foreign exchange rates."
+        "Custom Units are units of account created by Amatino users. Their scope is limited to the <a class=\"link\" href=\"\\documentation\\entities\">Entity</a> in which they are created. They can be used anywhere a <a class=\"link\" href=\"\\documentation\\global_units\">Global Unit</a> would be used, allowing you to denominate <a class=\"link\" href=\"\\documentation\\transactions\">Transactions</a> and <a class=\"link\" href=\"\\documentation\\accounts\">Accounts</a> as you please.",
+        "Custom Unit identifiers need not be unique with reference to Global Units. Therefore, it is possible to create a Custom Unit substitute of a Global Unit. For example, a <span class=\"monospace\">USD</span> Custom Unit using a preferred source of foreign exchange rates, with higher temporal resolution, or some other desired characteristic."
     ],
     "object": {
         "name": "Custom Unit",
