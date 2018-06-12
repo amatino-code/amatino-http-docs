@@ -4,7 +4,7 @@
     "docpath": "sessions",
     "introduction": [
         "Sessions are the keys to the Amatino kingdom. All requests to the Amatino API, except those requests to create Sessions themselves, must include two HTTP headers: An integer session identifier, and a Hashed Message Authentication Code (HMAC) signed with a Session API Key.",
-        "Creating a Session with a POST request is analogous to 'logging in', and deleting a Session with a DELETE request is analogous to 'logging out'. Your application might wish to create multiple Sessions for a User. For example, one per device.",
+        "Creating a Session with a POST request is analogous to 'logging in', and deleting a Session with a DELETE request is analogous to 'logging out'. Your application might wish to create multiple Sessions for a <a href=\"/documentation/user\" class=\"link\">User</a>. For example, one per device.",
         "The formula for the Amatino API HMAC signature is <span class=\"monospace\">SHA512((Unix timestamp in seconds) + (URI path) + (JSON data))</span>, using the Session API key as the hash key. The HMAC should be URL-safe Base64 encoded. For more help with generating request signatures, check out the <a class=\"list\" href=\"/knowledge/request-signatures\">Amatino API Request Signature knowledge base article.</a>"
     ],
     "object": {
@@ -72,16 +72,42 @@
                             "mono": true
                         },
                         "description": {
-                            "value": "The email address associated with the account for which a Session is to be created",
+                            "value": "The email address associated with the User for which a Session is to be created",
                             "mono": false
                         },
                         "type": {
-                            "value": "JSON String",
+                            "value": "JSON String or JSON Null",
                             "mono": false
                         },
                         "example": {
                             "value": "\"clever@cookie.com\"",
                             "mono": true
+                        },
+                        "note": {
+                            "value": "Supply either an account_email or user_id, but not both",
+                            "mono": false
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"user_id\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The integer identifier associated with the User for which a Session is to be created",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Number or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "8675392677",
+                            "mono": true
+                        },
+                        "note": {
+                            "value": "Supply either an account_email or user_id, but not both",
+                            "mono": false
                         }
                     },
                     {
@@ -90,7 +116,7 @@
                             "mono": true
                         },
                         "description": {
-                            "value": "The passphrase associated with the account for which a Session is to be created",
+                            "value": "The passphrase associated with the User for which a Session is to be created",
                             "mono": false
                         },
                         "type": {
