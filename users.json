@@ -243,7 +243,8 @@
                     "type": "integer number",
                     "description": "The user id of the User you wish to retrieve. Omit entirely to retrieve the authenticated user",
                     "example": "67892385239",
-                    "repeatable": true
+                    "repeatable": true,
+                    "max_repeats": 50
                 }
             ],
             "returns": {
