@@ -278,7 +278,7 @@
                     },
                     {
                         "key": {
-                            "value": "\"unit\"",
+                            "value": "\"global_unit_id\"",
                             "mono": true
                         },
                         "description": {
@@ -304,7 +304,7 @@
                     },
                     {
                         "key": {
-                            "value": "\"custom_unit\"",
+                            "value": "\"custom_unit_id\"",
                             "mono": true
                         },
                         "description": {

@@ -251,7 +251,7 @@
                             "mono": false
                         },
                         "example": {
-                            "value": "\"2017-01-07_17:22:16.51245\"",
+                            "value": "\"2017-01-17_17:22:16.51245\"",
                             "mono": true
                         }
                     },
@@ -283,15 +283,15 @@
                             "mono": true
                         },
                         "description": {
-                            "value": "The global unit in which this transaction is denominated, if desired. Either a custom or global unit must be specified.",
+                            "value": "The ID of the global unit in which this transaction is denominated, if desired. Either a custom or global unit must be specified.",
                             "mono": false
                         },
                         "type": {
-                            "value": "JSON String or JSON Null",
+                            "value": "JSON Number or JSON Null",
                             "mono": false
                         },
                         "example": {
-                            "value": "\"usd\"",
+                            "value": "5",
                             "mono": true
                         },
                         "source": {
@@ -306,19 +306,19 @@
                             "mono": true
                         },
                         "description": {
-                            "value": "The custom unit in which this transaction is denominated, if desired. Either a custom or global unit must be specified.",
+                            "value": "The ID of the custom unit in which this transaction is denominated, if desired. Either a custom or global unit must be specified.",
                             "mono": false
                         },
                         "type": {
-                            "value": "JSON String or JSON Null",
+                            "value": "JSON Number or JSON Null",
                             "mono": false
                         },
                         "example": {
-                            "value": "\"xrp\"",
+                            "value": "null",
                             "mono": true
                         },
                         "source": {
-                            "value": "/custom_unit/list",
+                            "value": "/custom_units/list",
                             "mono": false,
                             "link": "/documentation/custom_unit_list"
                         }

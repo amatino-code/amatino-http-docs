@@ -16,6 +16,24 @@
             "components": [
                 {
                     "key": {
+                        "value": "\"global_unit_id\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Number",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The unique integer identifier of this Global Unit",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "5",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
                         "value": "\"code\"",
                         "mono": true
                     },
@@ -129,10 +147,10 @@
             ],
             "required_url_parameters": [
                 {
-                    "key": "code",
-                    "type": "string",
-                    "description": "The unique code of the Global Unit you wish to retrieve",
-                    "example": "usd",
+                    "key": "global_unit_id",
+                    "type": "number",
+                    "description": "The unique integer identifier of the Global Unit you wish to retrieve",
+                    "example": "5",
                     "repeatable": true,
                     "max repeats": 10
                 }

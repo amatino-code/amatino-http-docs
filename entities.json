@@ -139,7 +139,7 @@
                             "mono": false
                         },
                         "type": {
-                            "value": "string",
+                            "value": "JSON String",
                             "mono": false
                         },
                         "example": {
@@ -161,7 +161,7 @@
                             "mono": false
                         },
                         "type": {
-                            "value": "JSON String",
+                            "value": "JSON String or JSON Null",
                             "mono": false
                         },
                         "example": {
@@ -179,21 +179,25 @@
                             "mono": true
                         },
                         "description": {
-                            "value": "The region in which the entity's data will be stored",
+                            "value": "The id of the region in which the entity's data will be stored",
                             "mono": false
                         },
                         "type": {
-                            "value": "JSON String",
+                            "value": "JSON Number",
                             "mono": false
                         },
                         "example": {
-                            "value": "\"Australia East 1\"",
+                            "value": "5",
                             "mono": true
                         },
                         "source": {
                             "value": "/regions",
                             "mono": false,
                             "link": "/documentation/regions"
+                        },
+                        "note": {
+                            "value": "Specify null to create the entity in the region geographically closest to you",
+                            "mono": false
                         }
                     }
                 ]
