@@ -153,7 +153,7 @@
                         "mono": false
                     },
                     "example": {
-                        "value": "\"xrp\"",
+                        "value": "76",
                         "mono": true
                     }
                 },
@@ -185,13 +185,13 @@
                         "mono": false
                     },
                     "description": {
-                        "value": "A list of <a class=\"link\" href=\"/documents/entries\">Entry objects</a> party to this transaction",
+                        "value": "A list of <a class=\"link\" href=\"/documentation/entries\">Entry objects</a> party to this transaction",
                         "mono": false
                     },
                     "listed_object": {
                         "value": "Entry",
                         "mono": false,
-                        "link": "/documents/entries"
+                        "link": "/documentation/entries"
                     },
                     "minimum length": {
                         "value": 2,
