@@ -60,7 +60,7 @@
         {
             "name": "Create",
             "method": "POST",
-            "path": "/authorisation/session",
+            "path": "/session",
             "description": "Create a new Amatino API Session",
             "return_root_type": "JSON Object",
             "required_json_data": {
@@ -141,7 +141,7 @@
         }, {
             "name": "Delete",
             "method": "DELETE",
-            "path": "/authorisation/session",
+            "path": "/session",
             "return_root_type": "JSON Object",
             "description": "Delete a Session, ending its ability to be used to authenticated to the Amatino API",
             "required_json_data": null,
