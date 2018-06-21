@@ -33,6 +33,24 @@
                 },
                 {
                     "key": {
+                        "value": "\"name\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The name of this entity",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"Project Azorian\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
                         "value": "\"owner\"",
                         "mono": true
                     },
@@ -64,6 +82,24 @@
                     },
                     "example": {
                         "value": "\"A company devoted to creating great accounting products\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"region_id\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Number",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The unique integer ID of the <a href=\"/documentation/regions\">Region</a> in which this Entity is physically stored",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "3",
                         "mono": true
                     }
                 },
@@ -183,7 +219,7 @@
                             "mono": false
                         },
                         "type": {
-                            "value": "JSON Number",
+                            "value": "JSON Number or JSON Null",
                             "mono": false
                         },
                         "example": {
