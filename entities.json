@@ -3,8 +3,9 @@
     "category": "primary",
     "docpath": "entities",
     "introduction": [
-        "An Amatino entity is a economic unit to be described by accounting information. Entities are described by accounts, transactions, and entries.",
-        "An example of an entity might be a legal company, a consolidated group of companies, a project, or even a person."
+        "An Amatino entity is a economic unit to be described by accounting information. Entities are described by <a href=\"/documentation/accounts\" class=\"link\">Accounts</a> and <a href=\"/documentation/transactions\" class=\"link\">Transactions</a>.",
+        "Examples of an Entity include a legal company, a consolidated group of companies, a project, or even a person.",
+        "<a href=\"/documentation/users\" class=\"link\">Users</a> may be granted fine-grained permissions to read and or write to individual Accounts within an Entity."
     ],
     "object": {
         "name": "Entity",

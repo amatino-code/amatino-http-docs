@@ -1,0 +1,291 @@
+{
+    "title": "User",
+    "category": "ancillary",
+    "docpath": "users",
+    "introduction": [
+        "A User is a human producer and consumer of data stored by Amatino. When you create an Amatino account on this website, a User is generated in your name. You can create other Users at will to serve the needs of your application. For example, you might wish to create an Amatino User to associate with each end-user of your application, in order to link financial information stored in Amatino with that end-user.",
+        "Users created via the Amatino API cannot login or otherwise interact with the amatino.io website in any way. They are not eligbile to receive customer support from us directly (though you are most welcome to request customer support to assist you with users you create), and don't generate associated <a href=\"/discussion\" class=\"link\">discussion forum</a> accounts. You have absolute control over their lifecycle. They can make requests to the Amatino API on their own behalf.",
+        "Generally, if you are creating User accounts for your fellow developers, you will want to do so in your <a href=\"/billing/manage-users\" class=\"link\">billing dashboard</a>. Doing so will allow them to manage their password, post to the discussion forums, and contact us for support. If you are creating Users to manage financial data inside your application, you will want to do so via the Amatino API.",
+        "Users and <a href=\"/documentation/entities\" class=\"link\">Entities</a> are woven together using permission graphs. Any User may be granted read and or write access to any <a href=\"/documentation/accounts\" class=\"link\">Account</a> in any Entity, whether they were created in the billing dashboard or via the Amatino API.",
+        "If you are on a Fixed Price plan, each additional user you create in the Amatino API will count towards your monthly bill. If you are on a Pay Per Use plan, creating additional Users incurs no direct marginal cost. You can <a href=\"/billing/change-subscription\" class=\"link\">change your plan</a> at any time."
+    ],
+    "object": {
+        "name": "User",
+        "exposition": "When returning a User to you, Amatino uses the following JSON object structure.",
+        "form": {
+            "root": "list",
+            "components": [
+                {
+                    "key": {
+                        "value": "\"user_id\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Number",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "An identifier for this user that is unique across all of Amatino",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": 95348572,
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"email\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String or JSON Null",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The email address associated with this User, if one exists",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "hugh@amatino.io",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"name\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String or JSON Null",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "A long form name associated with this User, if one exists",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "John Young",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"handle\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String or JSON Null",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "A short form name associated with this User, if one exists",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"Gemini 3\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"avatar_url\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "A url to a JPEG image avatar associated with this User, if one exists",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"https://content.amatino.io/avatars/orion.jpg\"",
+                        "mono": true
+                    }
+                }
+            ]
+        }
+    },
+    "actions": [
+        {
+            "name": "Create",
+            "method": "POST",
+            "path": "/users",
+            "description": "Create a new entity or entities",
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature",
+                    "example": "\"yxATCPRKAAXHNiPctNQPHEGGVJF\"..."
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID",
+                    "example": 7449059267091272858
+                }
+            ],
+            "required_url_parameters": [],
+            "return_root_type": "JSON Array",
+            "required_json_data": {
+                "root": "list",
+                "max_length": 10,
+                "components": [
+                    {
+                        "key": {
+                            "value": "\"name\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "An optional long form text identifier for the User",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"Chris Hemsworth\"",
+                            "mono": true
+                        },
+                        "max char length": {
+                            "value": 512,
+                            "mono": true
+                        } 
+                    },
+                    {
+                        "key": {
+                            "value": "\"handle\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "An optional short form text identifier for the User",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"Thor\"",
+                            "mono": true
+                        },
+                        "max char length": {
+                            "value": 512,
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"secret\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "A secret string to authenticate Session requests for the User",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"jPN6GQxVSTBQXMgwODaR/A\"",
+                            "mono": true
+                        },
+                        "requirement 1": {
+                            "value": "Must not include the word 'password'",
+                            "mono": false
+                        },
+                        "requirement 2": {
+                            "value": "Must include at least 4 unique characters",
+                            "mono": false
+                        },
+                        "min length": {
+                            "value": "12",
+                            "mono": true
+                        },
+                        "max length": {
+                            "value": "100",
+                            "mono": true
+                        }
+                    }
+                ]
+            },
+            "returns": {
+                "root": "list",
+                "components": {
+                    "object": "user"
+                }
+            }
+        }, {
+            "name": "Retrieve",
+            "method": "GET",
+            "path": "/user",
+            "description": "Retrieve a user or users",
+            "return_root_type": "JSON Array",
+            "required_json_data": {},
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature",
+                    "example": "\"yxATCPRKAAXHNiPctNQPHEGGVJF\"..."
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID",
+                    "example": 7449059267091272858
+                }
+            ],
+            "required_url_parameters": [
+                {
+                    "key": "user_id",
+                    "type": "integer number",
+                    "description": "The user id of the User you wish to retrieve. Omit entirely to retrieve the authenticated user",
+                    "example": "67892385239",
+                    "repeatable": true
+                }
+            ],
+            "returns": {
+                "root": "list",
+                "components": {
+                    "object": "user"
+                }
+            }
+        }, {
+            "name": "Delete",
+            "method": "DELETE",
+            "path": "/user",
+            "return_root_type": "JSON Array",
+            "description": "Permanently and irrecoverably delete a user or users",
+            "required_json_data": null,
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature",
+                    "example": "\"yxATCPRKAAXHNiPctNQPHEGGVJF\"..."
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID",
+                    "example": 7449059267091272858
+                }
+            ],
+            "required_url_parameters": [
+                {
+                    "key": "entity_id",
+                    "type": "string",
+                    "description": "The user id you wish to permanently and irrecoverably delete",
+                    "example": "oB3cjSNKXklkJ4Tb",
+                    "repeatable": false
+                }
+            ],
+            "returns": {
+                "root": "list",
+                "components": {
+                    "object": "user"
+                }
+            }
+        }
+    ]
+}

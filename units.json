@@ -1,0 +1,148 @@
+{
+    "title": "Global Unit",
+    "category": "ancillary",
+    "docpath": "global_units",
+    "introduction": [
+        "Global Units are units of account available by default in all <a class=\"link\" href=\"/documentation/entities\">Entities</a>. There are thirty-six Global Units available to choose from, covering most major currencies.",
+        "Any <a class=\"link\" href=\"/documentation/accounts\">Account</a> or <a class=\"link\" href=\"/documentation/transactions\">Transaction</a> may be denominated in any Global Unit, and any Ledger, Balance or other derived object may be retrieved in any Global Unit. You can insert, store, and retrieve account information in heterogenous units and Amatino will seamlessly convert units for you.",
+        "Each Global Unit has a daily price in every other Global Unit. All prices are closing day prices per the ECB.",
+        "If you require a higher temporal resolution than Global Units provide, or a Global Unit does not meet your requirements in some other way, you can create a Custom Unit with your required characteristics. Global Units and Custom Units can be intermingled at will, and Amatino will seamlessly convert between them as required."
+    ],
+    "object": {
+        "name": "Global Unit",
+        "exposition": "Amatino will return Global Unit objects to you with the following structure",
+        "form": {
+            "root": "list",
+            "components": [
+                {
+                    "key": {
+                        "value": "\"code\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The unique shorthand identifier of this Global Unit",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"usd\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"name\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "A friendly long form name",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"United States Dollar\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"priority\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Number",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "A sorting hint for GUI's displaying lists of Global Units",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": 0,
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"description\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "A long-form description",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"United States Dollar\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"exponent\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Number",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The number of digits after the decimal point required to describe the smallest fraction of this Global Unit",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": 2,
+                        "mono": true
+                    }
+                }
+            ]
+        }
+    },
+    "actions": [
+        {
+            "name": "Retrieve",
+            "method": "GET",
+            "path": "/units",
+            "description": "Retrieve a Global Unit or list of Global Units.",
+            "return_root_type": "JSON Array",
+            "required_json_data": null,
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature",
+                    "example": "\"yxATCPRKAAXHNiPctNQPHEGGVJF\"..."
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID",
+                    "example": 7449059267091272858
+                }
+            ],
+            "required_url_parameters": [
+                {
+                    "key": "code",
+                    "type": "string",
+                    "description": "The unique code of the Global Unit you wish to retrieve",
+                    "example": "usd",
+                    "repeatable": true,
+                    "max repeats": 10
+                }
+            ],
+            "returns": {
+                "root": "list",
+                "components": {
+                    "object": "global unit"
+                }
+            }
+        }
+    ]
+}
