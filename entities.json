@@ -378,7 +378,7 @@
                             "mono": false
                         },
                         "type": {
-                            "value": "JSON Object",
+                            "value": "JSON Object or JSON Null",
                             "mono": false
                         },
                         "example": {
@@ -401,6 +401,10 @@
                                 }
                             },
                             "mono": true
+                        },
+                        "note": {
+                            "value": "Is null if no permissions have been granted",
+                            "mono": false
                         }
                     }
                 ]
