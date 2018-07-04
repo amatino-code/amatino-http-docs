@@ -286,11 +286,11 @@
                             "mono": false
                         },
                         "type": {
-                            "value": "JSON String or JSON Null",
+                            "value": "JSON Number or JSON Null",
                             "mono": false
                         },
                         "example": {
-                            "value": "\"usd\"",
+                            "value": "5",
                             "mono": true
                         },
                         "source": {
@@ -312,11 +312,11 @@
                             "mono": false
                         },
                         "type": {
-                            "value": "JSON String or JSON Null",
+                            "value": "JSON Number or JSON Null",
                             "mono": false
                         },
                         "example": {
-                            "value": "\"xrp\"",
+                            "value": "23",
                             "mono": true
                         },
                         "source": {
