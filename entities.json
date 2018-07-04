@@ -211,7 +211,7 @@
                     },
                     {
                         "key": {
-                            "value": "\"region name\"",
+                            "value": "\"region_id\"",
                             "mono": true
                         },
                         "description": {
