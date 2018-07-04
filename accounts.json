@@ -556,7 +556,7 @@
                     },
                     {
                         "key": {
-                            "value": "\"unit\"",
+                            "value": "\"global_unit_id\"",
                             "mono": true
                         },
                         "description": {
@@ -564,11 +564,11 @@
                             "mono": false
                         },
                         "type": {
-                            "value": "JSON String or JSON Null",
+                            "value": "JSON Number or JSON Null",
                             "mono": false
                         },
                         "example": {
-                            "value": "\"usd\"",
+                            "value": "5",
                             "mono": true
                         },
                         "source": {
@@ -582,7 +582,7 @@
                     },
                     {
                         "key": {
-                            "value": "\"custom_unit\"",
+                            "value": "\"custom_unit_id\"",
                             "mono": true
                         },
                         "description": {
@@ -590,11 +590,11 @@
                             "mono": false
                         },
                         "type": {
-                            "value": "JSON String or JSON Null",
+                            "value": "JSON Number or JSON Null",
                             "mono": false
                         },
                         "example": {
-                            "value": "\"xrp\"",
+                            "value": "32",
                             "mono": true
                         },
                         "source": {
