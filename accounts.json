@@ -238,15 +238,15 @@
                             "mono": true
                         },
                         "description": {
-                            "value": "The fundamental account Type",
+                            "value": "The fundamental account Type, i.e asset, liability, income, expense, or equity",
                             "mono": false
                         },
                         "type": {
-                            "value": "JSON String",
+                            "value": "JSON Number",
                             "mono": false
                         },
                         "example": {
-                            "value": "\"income\"",
+                            "value": "1",
                             "mono": true
                         },
                         "source": {
