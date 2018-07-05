@@ -55,15 +55,15 @@
                         "mono": true
                     },
                     "type": {
-                        "value": "JSON String",
+                        "value": "JSON numbwe",
                         "mono": false
                     },
                     "description": {
-                        "value": "The type of the account, one of asset, liability, income, expense, or equity.",
+                        "value": "The type id of the account, one of asset, liability, income, expense, or equity.",
                         "mono": false
                     },
                     "example": {
-                        "value": "\"income\"",
+                        "value": "2",
                         "mono": true
                     }
                 },
@@ -87,11 +87,11 @@
                 },
                 {
                     "key": {
-                        "value": "\"unit\"",
+                        "value": "\"global_unit_id\"",
                         "mono": true
                     },
                     "type": {
-                        "value": "JSON String or JSON Null",
+                        "value": "JSON Number or JSON Null",
                         "mono": false
                     },
                     "description": {
@@ -99,17 +99,17 @@
                         "mono": false
                     },
                     "example": {
-                        "value": "\"usd\"",
+                        "value": "5",
                         "mono": true
                     }
                 },
                 {
                     "key": {
-                        "value": "\"custom_unit\"",
+                        "value": "\"custom_unit_id\"",
                         "mono": true
                     },
                     "type": {
-                        "value": "JSON String or JSON Null",
+                        "value": "JSON Number or JSON Null",
                         "mono": false
                     },
                     "description": {
@@ -117,13 +117,13 @@
                         "mono": false
                     },
                     "example": {
-                        "value": "\"xrp\"",
+                        "value": "42",
                         "mono": true
                     }
                 },
                 {
                     "key": {
-                        "value": "\"counterparth_entity_id\"",
+                        "value": "\"counterparty_entity_id\"",
                         "mono": true
                     },
                     "type": {
@@ -520,11 +520,11 @@
                             "mono": false
                         },
                         "type": {
-                            "value": "JSON String",
+                            "value": "JSON Number",
                             "mono": false
                         },
                         "example": {
-                            "value": "\"income\"",
+                            "value": "1",
                             "mono": true
                         },
                         "source": {
