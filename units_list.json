@@ -4,7 +4,7 @@
     "docpath": "global_unit_list",
     "introduction": [
         "<a class=\"link\" href=\"/documentation/global_units\">Global Units</a> are units of account available by default in all <a class=\"link\" href=\"/documentation/entities\">Entities</a>.",
-        "The Global Unit List enumerates all available Global Units."
+        "The Global Unit List contains all available Global Units."
     ],
     "object": {
         "name": "Global Unit List",
