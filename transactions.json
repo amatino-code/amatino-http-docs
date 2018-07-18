@@ -109,7 +109,7 @@
                         "mono": true
                     },
                     "type": {
-                        "value": "JSON String or JSON Null",
+                        "value": "JSON Number or JSON Null",
                         "mono": false
                     },
                     "description": {
@@ -117,7 +117,7 @@
                         "mono": false
                     },
                     "example": {
-                        "value": "\"usd\"",
+                        "value": "5",
                         "mono": true
                     }
                 },
@@ -127,7 +127,7 @@
                         "mono": true
                     },
                     "type": {
-                        "value": "JSON String or JSON Null",
+                        "value": "JSON Number or JSON Null",
                         "mono": false
                     },
                     "description": {
@@ -135,7 +135,7 @@
                         "mono": false
                     },
                     "example": {
-                        "value": "\"xrp\"",
+                        "value": "null",
                         "mono": true
                     }
                 },
