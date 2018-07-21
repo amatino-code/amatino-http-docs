@@ -1,7 +1,7 @@
 {
     "title": "Tree Node",
-    "category": "derived",
-    "docpath": "accounts/trees/node",
+    "category": "ancillary",
+    "docpath": "trees/node",
     "introduction": [
         "A Tree Node is a specialised view of an <a class=\"link\" href=\"/documentation/accounts\">Account</a>. You will never interact with Tree Nodes's directly, instead you will receive lists of Tree Nodes as components of requests for Trees.",
         "Tree Nodes are recursive objects that may contain other Tree Nodes, depending on whether the Account in question has any children."

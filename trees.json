@@ -5,7 +5,8 @@
     "introduction": [
         "Trees present the entire chart of <a class=\"link\" href=\"/documentation/accounts\">Accounts</a> of an <a class=\"link\" href=\"\\documentation\\entities\">Entity</a>. in a single hierarchical object. ",
         "Each Account is nested under its parent, and in turn lists all its children, all providing <a class=\"link\" href=\"/documentation/accounts/balance\">Balances</a> and <a class=\"link\" href=\"/documentation/accounts/recursive_balance\">Recursive Balances</a>.",
-        "Trees are trimmed for permissions. If the user requesting the tree only has read access to a subset of Accounts, they will only receive a tree containing those accounts, with placeholder objects filling the place of Accounts they are not permitted to read."
+        "Trees are trimmed for permissions. If the user requesting the tree only has read access to a subset of Accounts, they will only receive a tree containing those accounts, with placeholder objects filling the place of Accounts they are not permitted to read.",
+        "Each Account in the Tree is presented as a <a class=\"link\" href=\"/documentation/trees/node\">Tree Node</a>."
     ],
     "object": {
         "name": "Tree",
