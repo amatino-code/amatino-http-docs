@@ -109,15 +109,15 @@
                         "mono": true
                     },
                     "description": {
-                        "value": "The global unit in which this Ledger is denominated, if applicable",
+                        "value": "The id of the global unit in which this Ledger is denominated, if applicable",
                         "mono": false
                     },
                     "type": {
-                        "value": "JSON String or JSON Null",
+                        "value": "JSON Number or JSON Null",
                         "mono": false
                     },
                     "example": {
-                        "value": "\"usd\"",
+                        "value": "5",
                         "mono": true
                     }
                 },
@@ -127,15 +127,15 @@
                         "mono": true
                     },
                     "description": {
-                        "value": "The custom unit in which this Ledger is denominated, if applicable.",
+                        "value": "The id of the custom unit in which this Ledger is denominated, if applicable.",
                         "mono": false
                     },
                     "type": {
-                        "value": "JSON String or JSON Null",
+                        "value": "JSON Number or JSON Null",
                         "mono": false
                     },
                     "example": {
-                        "value": "\"xrp\"",
+                        "value": "null",
                         "mono": true
                     }
                 },
