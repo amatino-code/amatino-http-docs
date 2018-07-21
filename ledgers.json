@@ -290,15 +290,15 @@
                             "mono": true
                         },
                         "description": {
-                            "value": "The global unit denomination in which you would like to view the Ledger, if desired. Specify JSON Null both here and in the custom unit to retrieve the transaction in the target Account's native unit.",
+                            "value": "The id of the global unit denomination in which you would like to view the Ledger, if desired. Specify JSON Null both here and in the custom unit to retrieve the transaction in the target Account's native unit.",
                             "mono": false
                         },
                         "type": {
-                            "value": "JSON String or JSON Null",
+                            "value": "JSON Number or JSON Null",
                             "mono": false
                         },
                         "example": {
-                            "value": "\"eur\"",
+                            "value": "5",
                             "mono": true
                         },
                         "source": {
@@ -313,15 +313,15 @@
                             "mono": true
                         },
                         "description": {
-                            "value": "The custom unit denomination in which you would like to view the Ledger, if desired. Specify JSON Null both here and in the custom unit to retrieve the transaction in the target Account's native unit.",
+                            "value": "The id of the custom unit in which you would like to view the Ledger, if desired. Specify JSON Null both here and in the custom unit to retrieve the transaction in the target Account's native unit.",
                             "mono": false
                         },
                         "type": {
-                            "value": "JSON String or JSON Null",
+                            "value": "JSON Number or JSON Null",
                             "mono": false
                         },
                         "example": {
-                            "value": "\"btc\"",
+                            "value": "null",
                             "mono": true
                         },
                         "source": {
