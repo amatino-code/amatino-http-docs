@@ -1,0 +1,150 @@
+{
+    "title": "Tree Node",
+    "category": "derived",
+    "docpath": "accounts/trees/node",
+    "introduction": [
+        "A Tree Node is a specialised view of an <a class=\"link\" href=\"/documentation/accounts\">Account</a>. You will never interact with Tree Nodes's directly, instead you will receive lists of Tree Nodes as components of requests for Trees.",
+        "Tree Nodes are recursive objects that may contain other Tree Nodes, depending on whether the Account in question has any children."
+        ],
+    "object": {
+        "name": "Tree Node",
+        "exposition": "The Amatino API returns Tree Node objects with the following structure",
+        "form": {
+            "root": "object",
+            "components": [
+                {
+                    "key": {
+                        "value": "\"account_id\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Number",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "Integer identifier of the <a class=\"link\" href=\"/documentation/accounts\">Account</a> this Tree Node describes",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": 42,
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"depth\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Number",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The number of levels into the hierarchy this account sits. Top level accounts are 1.",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "2",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"account_balance\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The magnitude of the balance of the Account this Tree Node describes",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"400.30\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"name\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The name of the Account this Tree Node describes",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": false,
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"recursive_balance\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The magnitude of the recursive balance of the Account this Tree Node decribes (i.e. including all children)",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "600.01",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"type\"",
+                        "mono": true
+                    },
+                    "description": {
+                        "value": "The id of the <a class=\"link\" href=\"/documentation/constants/types\">Type</a> of the Account this Tree Node describes",
+                        "mono": false
+                    },
+                    "type": {
+                        "value": "JSON Number",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "1",
+                        "mono": true
+                    }
+                },
+                {
+                    "key" :{
+                        "value": "\"children\"",
+                        "mono": true
+                    },
+                    "description": {
+                        "value": "A list of <a class=\"link\" href=\"/documentation/trees/node\">Tree Node</a> objects for each child of the Account this Tree Node describes",
+                        "mono": false
+                    },
+                    "type": {
+                        "value": "JSON Array",
+                        "mono": false
+                    },
+                    "list objects": {
+                        "value": "Tree Node",
+                        "mono": false,
+                        "link": "/documentation/trees/node"
+                    },
+                    "example": {
+                        "value": "See <a href=\"/documentation/trees/node\" class=\"link\">Tree Nodes</a>",
+                        "mono": false
+                    }
+                }
+            ]
+        }
+    },
+    "actions": null
+}

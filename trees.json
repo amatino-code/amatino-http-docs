@@ -3,20 +3,19 @@
     "category": "derived",
     "docpath": "trees",
     "introduction": [
-        "Double-entry accounting divides accounts into five fundamental types: Assets, liabilities, equities, incomes and expenses. Throughout Amatino, these five constants are referred to as Types.",
-        "You will most often encounter Types when creating <a class=\"link\" href=\"/documentation/accounts\">Accounts</a>. Erstwhile, most of the work that Types do occurs behind the scenes, and you won't need to interact with them directly.",
-        "While you can retrieve the five Types with a GET request, they are unchanging and it is safe to hard-code them into your application.",
-        "Under the hood, Types allow Amatino to maintain the <a class=\"link\" href=\"/articles/fundamental-equality\">Fundamental Double-Entry Equality</a>."
+        "Trees present the entire chart of <a class=\"link\" href=\"/documentation/accounts\">Accounts</a> of an <a class=\"link\" href=\"\\documentation\\entities\">Entity</a>. in a single hierarchical object. ",
+        "Each Account is nested under its parent, and in turn lists all its children, all providing <a class=\"link\" href=\"/documentation/accounts/balance\">Balances</a> and <a class=\"link\" href=\"/documentation/accounts/recursive_balance\">Recursive Balances</a>.",
+        "Trees are trimmed for permissions. If the user requesting the tree only has read access to a subset of Accounts, they will only receive a tree containing those accounts, with placeholder objects filling the place of Accounts they are not permitted to read."
     ],
     "object": {
-        "name": "Type",
-        "exposition": "Type objects are returned with the following structure",
+        "name": "Tree",
+        "exposition": "Tree objects are returned with the following structure",
         "form": {
-            "root": "list",
+            "root": "object",
             "components": [
                 {
                     "key": {
-                        "value": "\"name\"",
+                        "value": "\"entity_id\"",
                         "mono": true
                     },
                     "type": {
@@ -24,12 +23,107 @@
                         "mono": false
                     },
                     "description": {
-                        "value": "Either <span class=\"monospace\">assets</span>, <span class=\"monospace\">liability</span>, <span class=\"monospace\">equity</span>, <span class=\"monospace\">income</span> or <span class=\"monospace\">expense</span>",
+                        "value": "The identifer of the <a class=\"link\" href=\"\\documentation\\entities\">Entity</a> this Tree describes",
                         "mono": false
                     },
                     "example": {
-                        "value": "\"asset\"",
+                        "value": "\"oB3cjSNKXklkJ4Tb\"",
                         "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"balance_time\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "Time of the Tree balance, in the format YYYY-MM-DD_HH24:MI:SS.US, in UTC.",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"2017-01-01_17:22:16.40288\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"generated_time\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "Time that this Balance was computed, in the format YYYY-MM-DD_HH24:MI:SS.US, in UTC",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"2018-05-02_05:01:54.72941\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"global_unit_denomination\"",
+                        "mono": true
+                    },
+                    "description": {
+                        "value": "The id of the global unit in which this Tree Balance is denominated, if applicable",
+                        "mono": false
+                    },
+                    "type": {
+                        "value": "JSON Number or JSON Null",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "5",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"custom_unit_denomination\"",
+                        "mono": true
+                    },
+                    "description": {
+                        "value": "The id of the custom unit in which this Tree is denominated, if applicable.",
+                        "mono": false
+                    },
+                    "type": {
+                        "value": "JSON Number or JSON Null",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "null",
+                        "mono": true
+                    }
+                },
+                {
+                    "key" :{
+                        "value": "\"tree\"",
+                        "mono": true
+                    },
+                    "description": {
+                        "value": "A list of <a class=\"link\" href=\"/documentation/trees/node\">Tree Node</a> objects",
+                        "mono": false
+                    },
+                    "type": {
+                        "value": "JSON Array",
+                        "mono": false
+                    },
+                    "list objects": {
+                        "value": "Tree Node",
+                        "mono": false,
+                        "link": "/documentation/trees/node"
+                    },
+                    "example": {
+                        "value": "See <a href=\"/documentation/trees/node\" class=\"link\">Tree Nodes</a>",
+                        "mono": false
                     }
                 }
             ]
@@ -39,10 +133,78 @@
         {
             "name": "Retrieve",
             "method": "GET",
-            "path": "/constants/account_types",
-            "description": "Retrieve the Amatino Type constants",
-            "return_root_type": "JSON Array",
-            "required_json_data": null,
+            "path": "/trees",
+            "description": "Retrieve a Tree",
+            "return_root_type": "JSON Object",
+            "required_json_data": {
+                "root": "object",
+                "components": [
+                    {
+                        "key": {
+                            "value": "\"balance_time\"",
+                            "mono": true
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "description": {
+                            "value": "Time of the Tree balance, in the format YYYY-MM-DD_HH24:MI:SS.US, in UTC. Specify null for balance at request time.",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"2017-01-01_17:22:16.40288\"",
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"global_unit_denomination\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The id of the global unit denomination in which you would like to view the Tree. Specify either global or custom unit denomination.",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Number or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "5",
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "/units/list",
+                            "mono": false,
+                            "link": "/documentation/unit_list"
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"custom_unit_denomination\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The id of the custom unit in which you would like to view the Ledger, if desired. Specify either global or custom unit denomination",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Number or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "null",
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "/custom_units/list",
+                            "mono": false,
+                            "link": "/documentation/custom_unit_list"
+                        }
+                    }
+                ]
+            },
             "required_headers": [
                 {
                     "key": "X-Signature",
@@ -55,11 +217,19 @@
                     "example": 7449059267091272858
                 }
             ],
-            "required_url_parameters": null,
+            "required_url_parameters": [
+                {
+                    "key": "entity_id",
+                    "type": "string",
+                    "description": "The entity id of the Entity for which you wish to retrieve a Tree",
+                    "example": "oB3cjSNKXklkJ4Tb",
+                    "repeatable": false
+                }
+            ],
             "returns": {
-                "root": "list",
+                "root": "object",
                 "components": {
-                    "object": "type"
+                    "object": "tree"
                 }
             }
         }
