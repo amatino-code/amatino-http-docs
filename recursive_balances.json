@@ -111,7 +111,7 @@
                         "mono": false
                     },
                     "type": {
-                        "value": "JSON String or JSON Null",
+                        "value": "JSON Number or JSON Null",
                         "mono": false
                     },
                     "example": {
