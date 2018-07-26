@@ -1,0 +1,328 @@
+{
+    "title": "Position",
+    "category": "derived",
+    "docpath": "positions",
+    "introduction": [
+        "Positions are hierarchical collections of Account balances describing the financial position of an Entity at a point in time. They are generic representations of popular accounting constructs better known as a 'Balance Sheet', 'Statement of Financial Position', or 'Statements of Assets, Liabilities and Owner's Equity",
+        "Positions are jurisdiction agnostic, and obey simple double-entry accounting rules. They list asset, liability, and equity Accounts, each nesting its own children.",
+        "You can retrieve Positions denominated in arbitrary Global Units or Custom Units. When a particular denomination gives rise to an unrealised gain or loss, Amatino will automatically calculate that gain or loss and include it as a top-level account in the returned Position.",
+        "Positions may also be retrieved to an arbitrary depth. Depth in the Position context is the number of levels down the Account hierarchy Amatino should go when retrieving the Position. For example, if a top-level Account has child accounts three layers deep, then specifying a depth of three will retrieve all those children.",
+        "Regardless of the depth you specify, Amatino will calculate recursive balances for all Accounts at full depth."
+    ],
+    "object": {
+        "name": "Position",
+        "exposition": "Position objects are returned with the following structure",
+        "form": {
+            "root": "object",
+            "components": [
+                {
+                    "key": {
+                        "value": "\"entity_id\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The identifer of the <a class=\"link\" href=\"\\documentation\\entities\">Entity</a> this Performance describes",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"oB3cjSNKXklkJ4Tb\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"balance_time\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String or JSON",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "Time of the Tree balance, in the format YYYY-MM-DD_HH24:MI:SS.US, in UTC.",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"2017-01-01_17:22:16.40288\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"generated_time\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "Time that this Position was computed, in the format YYYY-MM-DD_HH24:MI:SS.US, in UTC",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"2018-05-02_05:01:54.72941\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"global_unit_denomination\"",
+                        "mono": true
+                    },
+                    "description": {
+                        "value": "The id of the global unit in which this Tree Balance is denominated, if applicable",
+                        "mono": false
+                    },
+                    "type": {
+                        "value": "JSON Number or JSON Null",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "5",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"custom_unit_denomination\"",
+                        "mono": true
+                    },
+                    "description": {
+                        "value": "The id of the custom unit in which this Tree is denominated, if applicable.",
+                        "mono": false
+                    },
+                    "type": {
+                        "value": "JSON Number or JSON Null",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "null",
+                        "mono": true
+                    }
+                },
+                {
+                    "key" :{
+                        "value": "\"assets\"",
+                        "mono": true
+                    },
+                    "description": {
+                        "value": "A list of <a class=\"link\" href=\"/documentation/trees/node\">Tree Node</a> objects representing asset Accounts",
+                        "mono": false
+                    },
+                    "type": {
+                        "value": "JSON Array",
+                        "mono": false
+                    },
+                    "list objects": {
+                        "value": "Tree Node",
+                        "mono": false,
+                        "link": "/documentation/trees/node"
+                    },
+                    "example": {
+                        "value": "See <a href=\"/documentation/trees/node\" class=\"link\">Tree Nodes</a>",
+                        "mono": false
+                    }
+                },
+                {
+                    "key" :{
+                        "value": "\"liabilities\"",
+                        "mono": true
+                    },
+                    "description": {
+                        "value": "A list of <a class=\"link\" href=\"/documentation/trees/node\">Tree Node</a> objects representing liability Accounts",
+                        "mono": false
+                    },
+                    "type": {
+                        "value": "JSON Array",
+                        "mono": false
+                    },
+                    "list objects": {
+                        "value": "Tree Node",
+                        "mono": false,
+                        "link": "/documentation/trees/node"
+                    },
+                    "example": {
+                        "value": "See <a href=\"/documentation/trees/node\" class=\"link\">Tree Nodes</a>",
+                        "mono": false
+                    }
+                }, {
+                    "key" :{
+                        "value": "\"equities\"",
+                        "mono": true
+                    },
+                    "description": {
+                        "value": "A list of <a class=\"link\" href=\"/documentation/trees/node\">Tree Node</a> objects representing equity Accounts",
+                        "mono": false
+                    },
+                    "type": {
+                        "value": "JSON Array",
+                        "mono": false
+                    },
+                    "list objects": {
+                        "value": "Tree Node",
+                        "mono": false,
+                        "link": "/documentation/trees/node"
+                    },
+                    "example": {
+                        "value": "See <a href=\"/documentation/trees/node\" class=\"link\">Tree Nodes</a>",
+                        "mono": false
+                    }
+                },
+                {
+                    "key" :{
+                        "value": "\"depth\"",
+                        "mono": true
+                    },
+                    "description": {
+                        "value": "The maximum Account depth to which this Position recurses",
+                        "mono": false
+                    },
+                    "type": {
+                        "value": "JSON Number",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "3",
+                        "mono": true
+                    }
+                }
+            ]
+        }
+    },
+    "actions": [
+        {
+            "name": "Retrieve",
+            "method": "GET",
+            "path": "/positions",
+            "description": "Retrieve a Position",
+            "return_root_type": "JSON Object",
+            "required_json_data": {
+                "root": "object",
+                "components": [
+                    {
+                        "key": {
+                            "value": "\"balance_time\"",
+                            "mono": true
+                        },
+                        "type": {
+                            "value": "JSON String or JSON Null",
+                            "mono": false
+                        },
+                        "description": {
+                            "value": "Time of the Tree balance, in the format YYYY-MM-DD_HH24:MI:SS.US, in UTC. Specify null for balance at request time.",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"2017-01-01_17:22:16.40288\"",
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"global_unit_denomination\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The id of the global unit denomination in which you would like to view the Tree. Specify either global or custom unit denomination.",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Number or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "5",
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "/units/list",
+                            "mono": false,
+                            "link": "/documentation/unit_list"
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"custom_unit_denomination\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The id of the custom unit in which you would like to view the Ledger, if desired. Specify either global or custom unit denomination",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Number or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "null",
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "/custom_units/list",
+                            "mono": false,
+                            "link": "/documentation/custom_unit_list"
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"depth\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The number of levels of Accounts you wish the Position to include. Specify null for full depth.",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Number or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "3",
+                            "mono": true
+                        },
+                        "max value": {
+                            "value": 4096,
+                            "mono": true
+                        },
+                        "min value": {
+                            "value": 1,
+                            "mono": true
+                        }
+                    }
+                ]
+            },
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature",
+                    "example": "\"yxATCPRKAAXHNiPctNQPHEGGVJF\"..."
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID",
+                    "example": 7449059267091272858
+                }
+            ],
+            "required_url_parameters": [
+                {
+                    "key": "entity_id",
+                    "type": "string",
+                    "description": "The entity id of the Entity for which you wish to retrieve a Position",
+                    "example": "oB3cjSNKXklkJ4Tb",
+                    "repeatable": false
+                }
+            ],
+            "returns": {
+                "root": "object",
+                "components": {
+                    "object": "tree"
+                }
+            }
+        }
+    ]
+}
