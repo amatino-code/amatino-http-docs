@@ -23,7 +23,7 @@
                         "mono": false
                     },
                     "description": {
-                        "value": "A unique identifier for this transaction within the entity",
+                        "value": "A unique identifier for this transaction within the Entity",
                         "mono": false
                     },
                     "example": {

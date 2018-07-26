@@ -3,9 +3,9 @@
     "category": "derived",
     "docpath": "performances",
     "introduction": [
-        "A Performance is a hierarchical collection of Account balances describing the financial performance of an Entity over a period of time. They are generic representations of popular accounting constructs known as the 'Income Statement', 'Profit & Loss', or 'Statement of Financial Performance'.",
-        "The Peformance object is jurisdiction agnostic, and obey simple double-entry accounting rules. They list income and expense, each nesting its own children.",
-        "You can retrieve a Performance denominated in an arbitrary Global Unit or Custom Unit. Amatino will automatically calculate the implicit gain or loss relative to each Account's underlying denomination and include those gains and losses in each Account balance.",
+        "A Performance is a hierarchical collection of <a class=\"link\" href=\"/documentation/accounts\">Account</a> balances describing the financial performance of an <a class=\"link\" href=\"/documentation/entities\">Entity</a> over a period of time. They are generic representations of popular accounting constructs known as the 'Income Statement', 'Profit & Loss', or 'Statement of Financial Performance'.",
+        "The Peformance object is jurisdiction agnostic, and obeys simple double-entry accounting rules. They list income and expense, each nesting its own children.",
+        "You can retrieve a Performance denominated in an arbitrary <a class=\"link\" href=\"/documentation/unit\">Global Unit</a> or <a class=\"link\" href=\"/documentation/custom_unit\">Custom Unit</a>. Amatino will automatically calculate the implicit gain or loss relative to each Account's underlying denomination and include those gains and losses in each Account balance.",
         "A Performance may be retrieved to an arbitrary depth. Depth in the Performance context is the number of levels down the Account hierarchy Amatino should go when retrieving the Performance. For example, if a top-level Account has child accounts three layers deep, then specifying a depth of three will retrieve all those children.",
         "Regardless of the depth you specify, Amatino will calculate recursive balances at full depth."
     ],
