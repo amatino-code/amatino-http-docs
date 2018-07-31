@@ -23,7 +23,7 @@
                         "mono": false
                     },
                     "description": {
-                        "value": "An integer identifier of the <a class=\"link\" href=\"/documentation/accounts\"Account this Ledger describes",
+                        "value": "An integer identifier of the <a class=\"link\" href=\"/documentation/accounts\">Account</a> this Ledger describes",
                         "mono": false
                     },
                     "example": {

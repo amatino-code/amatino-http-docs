@@ -8,7 +8,7 @@
         "Amatino will return a maximum total of 1,000 Ledger Rows per retrieval request. If the Ledger you define spans more than 1,000 rows, it will be broken into pages you can retrieve seperately."
     ],
     "object": {
-        "name": "Ledger",
+        "name": "Recursive Ledger",
         "exposition": "The Amatino API returns Recursive Ledger objects with the following structure",
         "form": {
             "root": "object",
@@ -23,7 +23,7 @@
                         "mono": false
                     },
                     "description": {
-                        "value": "An integer identifier of the <a class=\"link\" href=\"/documentation/accounts\"Account this Ledger describes",
+                        "value": "An integer identifier of the <a class=\"link\" href=\"/documentation/accounts\">Account</a> this Ledger describes",
                         "mono": false
                     },
                     "example": {
