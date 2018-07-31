@@ -11,7 +11,7 @@
         "name": "Ledger",
         "exposition": "The Amatino API returns Recursive Ledger objects with the following structure",
         "form": {
-            "root": "list",
+            "root": "object",
             "components": [
                 {
                     "key": {
@@ -41,7 +41,7 @@
                         "mono": false
                     },
                     "description": {
-                        "value": "Time at which the ledger starts, in the format YYYY-MM-DD_HH24:MI:SS.US",
+                        "value": "Time at which the ledger window starts, in the format YYYY-MM-DD_HH24:MI:SS.US",
                         "mono": false
                     },
                     "example": {
@@ -59,7 +59,7 @@
                         "mono": false
                     },
                     "description": {
-                        "value": "Time at which the ledger ends, in the format YYYY-MM-DD_HH24:MI:SS.US",
+                        "value": "Time at which the ledger window ends, in the format YYYY-MM-DD_HH24:MI:SS.US",
                         "mono": false
                     },
                     "example": {
@@ -172,6 +172,24 @@
                     },
                     "example": {
                         "value": 3,
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"ordered_oldest_first\"",
+                        "mono": true
+                    },
+                    "description": {
+                        "value": "True of the ledger presents oldest transactions first, false if newest first",
+                        "mono": false
+                    },
+                    "type": {
+                        "value": "JSON Bool",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "true",
                         "mono": true
                     }
                 },
@@ -329,6 +347,24 @@
                             "mono": false,
                             "link": "/documentation/custom_unit_list"
                         }
+                    },
+                    {
+                        "key": {
+                            "value": "\"order_oldest_first\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "Specify true to order the ledger oldest first, false to reverse.",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Bool",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "false",
+                            "mono": true
+                        }
                     }
                 ]
             },
@@ -354,9 +390,9 @@
                 }
             ],
             "returns": {
-                "root": "list",
+                "root": "object",
                 "components": {
-                    "object": "side"
+                    "object": "recursive ledger"
                 }
             }
         }
