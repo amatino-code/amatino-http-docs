@@ -3,8 +3,9 @@
     "category": "ancillary",
     "docpath": "trees/node",
     "introduction": [
-        "A Tree Node is a specialised view of an <a class=\"link\" href=\"/documentation/accounts\">Account</a>. You will never interact with Tree Nodes's directly, instead you will receive lists of Tree Nodes as components of requests for Trees.",
-        "Tree Nodes are recursive objects that may contain other Tree Nodes, depending on whether the Account in question has any children."
+        "A Tree Node is a specialised view of an <a class=\"link\" href=\"/documentation/accounts\">Account</a>. It provides a recursive and individual balance for an Account. You will never interact with Tree Nodes' directly, instead you will receive lists of Tree Nodes as components of requests for <a class=\"link\" href=\"/documentation/trees\">Trees</a>, <a class=\"link\" href=\"/documentation/positions\">Positions</a>, and <a class=\"link\" href=\"/documentation/performances\">Performances</a>.",
+        "Tree Nodes are recursive objects that may contain other Tree Nodes, depending on whether the Account in question has any children.",
+        "Trees, Positions, and Performances describe entire <a class=\"link\" href=\"/documentation/entities\">Entities</a>. The <a class=\"link\" href=\"/documentation/users\">User</a> from whose perspective you retrieve a Tree, Position, or Performance may not have read access to every Account in the Entity. In such cases, Tree Nodes describing Accounts to which a User does not have read access will be returned with <span class=\"monospace\">null</span> in their balance fields, and a generic <a class=\"link\" href=\"/documentation/constants/types\">Type</a> in place of the actual Account name."
         ],
     "object": {
         "name": "Tree Node",
@@ -58,7 +59,7 @@
                         "mono": false
                     },
                     "description": {
-                        "value": "The magnitude of the balance of the Account this Tree Node describes",
+                        "value": "The magnitude of the balance of the described Account, or <span class=\"monospace\">null</span> if the retrieving User lacks read privileges.",
                         "mono": false
                     },
                     "example": {
@@ -76,7 +77,7 @@
                         "mono": false
                     },
                     "description": {
-                        "value": "The name of the Account this Tree Node describes",
+                        "value": "The name of the Account this Tree Node describes, or the Type name if the retrieving User lacks read privileges.",
                         "mono": false
                     },
                     "example": {
@@ -90,11 +91,11 @@
                         "mono": true
                     },
                     "type": {
-                        "value": "JSON String",
+                        "value": "JSON String or JSON Null",
                         "mono": false
                     },
                     "description": {
-                        "value": "The magnitude of the recursive balance of the Account this Tree Node decribes (i.e. including all children)",
+                        "value": "The magnitude of the recursive balance of the described Account, or <span class=\"monospace\">null</span> if the retrieving User lacks read privileges.",
                         "mono": false
                     },
                     "example": {
