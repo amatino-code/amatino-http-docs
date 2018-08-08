@@ -461,7 +461,8 @@
                             "mono": true
                         }
                     }
-                ],
+                ]
+            },
             "required_headers": [
                 {
                     "key": "X-Signature",
