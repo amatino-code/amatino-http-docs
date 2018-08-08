@@ -1,0 +1,494 @@
+{
+    "title": "Price",
+    "category": "ancillary",
+    "docpath": "prices",
+    "introduction": [
+        "A Price is the number of units equal in value to a single denominating unit. For example, the price of one U.S. Dollar might be 0.86 Euros.",
+        "Prices may retrieved in any Global Unit or Custom Unit, and denominated in any Global Unit or Custom Unit. Custom Unit Prices may only be denominated in Custom Units from within the same Entity.",
+        "You need not have supplied explicit prices for a given pairing, Amatino will derive prices from available data. For example, you may have supplied price data for Bitcoin in U.S. Dollars, but wish to retrieve the price of a Bitcoin in Euros.",
+        "Prices may be created for any Custom Unit. Global Unit prices are constants, and prices may only be retrieved for Global Units. When creating a Custom Unit Price, the Price may be denominated in any Global Unit, or in any Custom Unit for which you have previously supplied at least one Price.",
+        "When calculating Prices for retrieval, Amatino looks for the most recent available data less than or equal to the date of the Price. For example, if you supply prices for a Custom Unit on 23 Jan 2018 and 25 Jan 2018, and then request a Price dated at 24 Jan 2018, Amatino will use the 23 Jan 2018 data.",
+        "All Global Unit Prices served by Amatino come courtesy of the European Central Bank (ECB)."
+        ],
+    "object": {
+        "name": "Price",
+        "exposition": "The Amatino API returns Price objects with the following structure",
+        "form": {
+            "root": "object",
+            "components": [
+                {
+                    "key": {
+                        "value": "\"global_unit_id\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Number or JSON Null",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "Integer identifier of the <a class=\"link\" href=\"/documentation/units\">Global Unit</a> this Price describes, or <span class=\"monospace\">null</span> if this Price describes a <a class=\"link\" href=\"/documentation/custom_units\">Custom Unit</a>.",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": 42,
+                        "mono": true
+                    },
+                    "source": {
+                        "value": "/units/list",
+                        "mono": false,
+                        "link": "/documentation/unit_list"
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"custom_unit_id\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Number or JSON Null",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "Integer identifier of the <a class=\"link\" href=\"/documentation/custom_units\">Custom Unit</a> this Price describes, or <span class=\"monospace\">null</span> if this Price describes a <a class=\"link\" href=\"/documentation/global_units\">Global Unit</a>.",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": 42,
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"denomination_global_unit_id\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Number or JSON Null",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "Integer identifier of the <a class=\"link\" href=\"/documentation/units\">Global Unit</a> denominating this Price, or <span class=\"monospace\">null</span> if this Price is denominated by <a class=\"link\" href=\"/documentation/custom_units\">Custom Unit</a>.",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": 42,
+                        "mono": true
+                    },
+                    "source": {
+                        "value": "/units/list",
+                        "mono": false,
+                        "link": "/documentation/unit_list"
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"denomination_custom_unit_id\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON Number or JSON Null",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "Integer identifier of the <a class=\"link\" href=\"/documentation/custom_units\">Custom Unit</a> denominating this Price, or <span class=\"monospace\">null</span> if this Price is denominated by a <a class=\"link\" href=\"/documentation/global_units\">Global Unit</a>.",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": 42,
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"magnitude\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "The number of priced units equal in value to one denominating unit",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "42.00",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"price_time\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "Time at which this Price holds, in the format YYYY-MM-DD_HH24:MI:SS.US",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"2018-05-02_05:01:54.72941\"",
+                        "mono": true
+                    }
+                },
+                {
+                    "key": {
+                        "value": "\"generated_time\"",
+                        "mono": true
+                    },
+                    "type": {
+                        "value": "JSON String",
+                        "mono": false
+                    },
+                    "description": {
+                        "value": "Time that this Price was computed, in the format YYYY-MM-DD_HH24:MI:SS.US",
+                        "mono": false
+                    },
+                    "example": {
+                        "value": "\"2018-05-02_05:01:54.72941\"",
+                        "mono": true
+                    }
+                }
+            ]
+        }
+    },
+    "actions": [{
+            "name": "Retrieve",
+            "method": "GET",
+            "path": "/prices",
+            "description": "Retrieve a Price or set of Prices",
+            "return_root_type": "JSON Array",
+            "required_json_data": {
+                "root": "list",
+                "max_length": 10,
+                "components": [
+                    {
+                        "key": {
+                            "value": "\"global_unit_id\"",
+                            "mono": true
+                        },
+                        "type": {
+                            "value": "JSON Number or JSON Null",
+                            "mono": false
+                        },
+                        "description": {
+                            "value": "Integer identifier of the <a class=\"link\" href=\"/documentation/units\">Global Unit</a> you wish to price, or <span class=\"monospace\">null</span> if you wish to wish to price a <a class=\"link\" href=\"/documentation/custom_units\">Custom Unit</a>.",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": 42,
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "/units/list",
+                            "mono": false,
+                            "link": "/documentation/unit_list"
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"custom_unit_id\"",
+                            "mono": true
+                        },
+                        "type": {
+                            "value": "JSON Number",
+                            "mono": false
+                        },
+                        "description": {
+                            "value": "Integer identifier of the <a class=\"link\" href=\"/documentation/custom_units\">Custom Unit</a> you wish to price.",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": 42,
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": { 
+                            "value": "\"denomination_global_unit_id\"",
+                            "mono": true
+                        },
+                        "type": {
+                            "value": "JSON Number or JSON Null",
+                            "mono": false
+                        },
+                        "description": {
+                            "value": "Integer identifier of the <a class=\"link\" href=\"/documentation/units\">Global Unit</a> denomination you wish to use, or <span class=\"monospace\">null</span> if you wish to use a <a class=\"link\" href=\"/documentation/custom_units\">Custom Unit</a>.",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": 42,
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "/units/list",
+                            "mono": false,
+                            "link": "/documentation/unit_list"
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"denomination_custom_unit_id\"",
+                            "mono": true
+                        },
+                        "type": {
+                            "value": "JSON Number or JSON Null",
+                            "mono": false
+                        },
+                        "description": {
+                            "value": "Integer identifier of the <a class=\"link\" href=\"/documentation/custom_units\">Custom Unit</a> denomination you wish to use, or <span class=\"monospace\">null</span> if you wish to use a <a class=\"link\" href=\"/documentation/global_units\">Global Unit</a>.",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": 42,
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"price_time\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "Time at which the Price should hold, in the format YYYY-MM-DD_HH24:MI:SS.US",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"2017-01-17_17:22:16.51245\"",
+                            "mono": true
+                        }
+                    }
+                ]
+            },
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature",
+                    "example": "\"yxATCPRKAAXHNiPctNQPHEGGVJF\"..."
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID",
+                    "example": 7449059267091272858
+                }
+            ],
+            "required_url_parameters": [
+                {
+                    "key": "entity_id",
+                    "type": "string",
+                    "description": "The entity id of the entity in which you wish to retrieve Prices",
+                    "example": "oB3cjSNKXklkJ4Tb",
+                    "repeatable": false
+                }
+            ],
+            "returns": {
+                "root": "list",
+                "components": {
+                    "object": "Price"
+                }
+            }
+        }, {
+            "name": "Create",
+            "method": "POST",
+            "path": "/prices",
+            "description": "Create a new Price or Prices",
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature",
+                    "example": "\"yxATCPRKAAXHNiPctNQPHEGGVJF\"..."
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID",
+                    "example": 7449059267091272858
+                }
+            ],
+            "required_url_parameters": [
+                {
+                    "key": "entity_id",
+                    "type": "string",
+                    "description": "The entity id of the entity in which you wish to record Prices",
+                    "example": "oB3cjSNKXklkJ4Tb",
+                    "repeatable": false
+                }
+            ],
+            "return_root_type": "JSON Array",
+            "required_json_data": {
+                "root": "list",
+                "max_length": 10,
+                "components": [
+                    {
+                        "key": {
+                            "value": "\"price_time\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "Time at which the Price holds, in the format YYYY-MM-DD_HH24:MI:SS.US",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"2017-01-17_17:22:16.51245\"",
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"custom_unit_id\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The ID of the <a class=\"link\" href=\"/documentation/custom_units\">Custom Unit</a> this Price should describe.",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Number",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "42",
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"denomination_custom_unit_id\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "Integer identifier of the <a class=\"link\" href=\"/documentation/custom_units\">Custom Unit</a> denomination you wish to use, or <span class=\"monospace\">null</span> if this Price is denominated by a <a class=\"link\" href=\"/documentation/global_units\">Global Unit</a>.",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Number or JSON Null",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "null",
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "/custom_units/list",
+                            "mono": false,
+                            "link": "/documentation/custom_unit_list"
+                        }
+                    },
+                    {
+                        "key": { 
+                            "value": "\"denomination_global_unit_id\"",
+                            "mono": true
+                        },
+                        "type": {
+                            "value": "JSON Number or JSON Null",
+                            "mono": false
+                        },
+                        "description": {
+                            "value": "Integer identifier of the <a class=\"link\" href=\"/documentation/units\">Global Unit</a> denomination you wish to use, or <span class=\"monospace\">null</span> if you wish to use a <a class=\"link\" href=\"/documentation/custom_units\">Custom Unit</a>.",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": 42,
+                            "mono": true
+                        },
+                        "source": {
+                            "value": "/units/list",
+                            "mono": false,
+                            "link": "/documentation/unit_list"
+                        }
+                    }
+                ]
+            },
+            "returns": {
+                "root": "list",
+                "components": {
+                    "object": "transaction"
+                }
+            }
+        }, {
+            "name": "Delete",
+            "method": "DELETE",
+            "path": "/prices",
+            "return_root_type": "JSON Array",
+            "description": "Delete a Price or Prices",
+            "required_json_data": {
+                "root": "list",
+                "max_length": 10,
+                "components": [
+                    {
+                        "key": {
+                            "value": "\"custom_unit_id\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "The ID of the Custom Unit for which you wish to delete a Price.",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON Number",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "42",
+                            "mono": true
+                        }
+                    },
+                    {
+                        "key": {
+                            "value": "\"price_time\"",
+                            "mono": true
+                        },
+                        "description": {
+                            "value": "Time of the Price you wish to delete, in the format YYYY-MM-DD_HH24:MI:SS.US",
+                            "mono": false
+                        },
+                        "type": {
+                            "value": "JSON String",
+                            "mono": false
+                        },
+                        "example": {
+                            "value": "\"2017-01-17_17:22:16.51245\"",
+                            "mono": true
+                        }
+                    }
+                ],
+            "required_headers": [
+                {
+                    "key": "X-Signature",
+                    "content": "Your <a class=\"link\" href=\"/documentation/sessions\">Session</a> signature",
+                    "example": "\"yxATCPRKAAXHNiPctNQPHEGGVJF\"..."
+                },
+                {
+                    "key": "X-Session-ID",
+                    "content": "An an integer <a class=\"link\" href=\"/documentation/sessions\">Session</a> ID",
+                    "example": 7449059267091272858
+                }
+            ],
+            "required_url_parameters": [
+                {
+                    "key": "entity_id",
+                    "type": "string",
+                    "description": "The entity id of the entity in which you wish to delete Prices",
+                    "example": "oB3cjSNKXklkJ4Tb",
+                    "repeatable": false
+                }
+            ],
+            "returns": {
+                "root": "list",
+                "components": {
+                    "object": "transaction"
+                }
+            }
+        }
+    ]
+}
