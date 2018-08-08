@@ -3,8 +3,7 @@
     "category": "ancillary",
     "docpath": "prices",
     "introduction": [
-        "A Price is the number of units equal in value to a single denominating unit. For example, the price of one U.S. Dollar might be 0.86 Euros.",
-        "Prices may retrieved in any Global Unit or Custom Unit, and denominated in any Global Unit or Custom Unit. Custom Unit Prices may only be denominated in Custom Units from within the same Entity.",
+        "A Price is the number of units equal in value to a single denominating unit. For example, the price of one U.S. Dollar might be 0.86 Euros. Prices may retrieved in any <a class=\"link\" href=\"/documentation/units\">Global Unit</a> or <a class=\"link\" href=\"/documentation/custom_units\">Custom Unit</a>, and denominated in any Global Unit or Custom Unit. Custom Unit Prices may only be denominated in Custom Units from within the same <a class=\"link\" href=\"/documentation/entities\">Entity</a>.",
         "You need not have supplied explicit prices for a given pairing, Amatino will derive prices from available data. For example, you may have supplied price data for Bitcoin in U.S. Dollars, but wish to retrieve the price of a Bitcoin in Euros.",
         "Prices may be created for any Custom Unit. Global Unit prices are constants, and prices may only be retrieved for Global Units. When creating a Custom Unit Price, the Price may be denominated in any Global Unit, or in any Custom Unit for which you have previously supplied at least one Price.",
         "When calculating Prices for retrieval, Amatino looks for the most recent available data less than or equal to the date of the Price. For example, if you supply prices for a Custom Unit on 23 Jan 2018 and 25 Jan 2018, and then request a Price dated at 24 Jan 2018, Amatino will use the 23 Jan 2018 data.",
@@ -30,7 +29,7 @@
                         "mono": false
                     },
                     "example": {
-                        "value": 42,
+                        "value": 5,
                         "mono": true
                     },
                     "source": {
@@ -71,7 +70,7 @@
                         "mono": false
                     },
                     "example": {
-                        "value": 42,
+                        "value": 5,
                         "mono": true
                     },
                     "source": {
@@ -179,7 +178,7 @@
                             "mono": false
                         },
                         "example": {
-                            "value": 42,
+                            "value": 5,
                             "mono": true
                         },
                         "source": {
@@ -398,7 +397,7 @@
                             "mono": false
                         },
                         "example": {
-                            "value": 42,
+                            "value": 5,
                             "mono": true
                         },
                         "source": {
